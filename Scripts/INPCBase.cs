@@ -80,8 +80,14 @@ public class INPCBase : MonoBehaviour
             // This is where you might set INPCAction.Sleeping, INPCAction.Working, etc.
         }
 
-        if (!_interacting)
+if (!_interacting)
         {
+            // Ensure the agent is not stopped if it's not interacting
+            if (_navComponent.isStopped)
+            {
+                _navComponent.isStopped = false;
+            }
+
             if (!_roaming)
             {
                 FreeRoam();
@@ -108,7 +114,36 @@ public class INPCBase : MonoBehaviour
             _animator.SetFloat("Speed", _navComponent.velocity.magnitude);
         }
     }
+/// <summary>
+    /// Puts the NPC into an interaction state, freezing its movement.
+    /// </summary>
+    /// <param name="player">The transform of the player to interact with.</param>
+    public void EngageInteraction(Transform player)
+    {
+        _interacting = true;
+        _player = player;
 
+        if (_navComponent != null)
+        {
+            _navComponent.isStopped = true; // Freeze the NavMeshAgent
+            _navComponent.ResetPath();      // Clear any existing path
+        }
+    }
+
+    /// <summary>
+    /// Releases the NPC from an interaction state, allowing it to move again.
+    /// </summary>
+    public void DisengageInteraction()
+    {
+        _interacting = false;
+        _player = null;
+
+        if (_navComponent != null)
+        {
+            _navComponent.isStopped = false; // Unfreeze the NavMeshAgent
+        }
+        SetAction(INPCAction.None); // Return to idle/roaming state
+    }
     /// <summary>
     /// Sets the current action of the NPC and updates the Animator's "ActionState" parameter.
     /// </summary>

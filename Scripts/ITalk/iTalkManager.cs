@@ -13,7 +13,22 @@ namespace CelestialCyclesSystem
     /// updating the list of interactable NPCs, and overseeing dialogue flow for player-initiated conversations only.
     /// NPC-to-NPC conversations are handled by iTalkSubManager.
     /// </summary>
-    public class iTalkManager : MonoBehaviour
+    ///   
+    public interface ITalkManager
+    {
+        void RegisteriTalk(iTalk talkComponent);
+        void UnregisteriTalk(iTalk talkComponent);
+        void RegisterController(iTalkController controller);
+        void UnregisterController(iTalkController controller);
+        bool IsNPCInteractable(iTalk npc, Vector3 playerPosition, out string reason);
+        bool TryStartPlayerConversation(iTalk npc);
+        void RequestDialogueFromAI(iTalk speakeriTalk, string userInput, string conversationHistory, Action<string> onSuccess, Action<string> onError);
+        void RequestTTS(iTalkNPCPersona speakerPersona, string textToSpeak, AudioSource targetAudioSource);
+        iTalkApiConfigSO GetApiConfig();
+        List<iTalkNewsItemEntry> GetWorldNews();
+        string GetCurrentGlobalSituation();
+    }
+    public class iTalkManager : MonoBehaviour, ITalkManager
     {
         public static iTalkManager Instance { get; private set; }
 
@@ -30,7 +45,7 @@ namespace CelestialCyclesSystem
 
         [Header("Interaction Settings")]
         public float maxInteractionDistance = 5.0f;
-        public float interactableCheckInterval = 0.5f;
+        public LayerMask interactableLayer; // MODIFIED: Replaced interval timer with a LayerMask
 
         [Header("Token Management")]
         public float estimatedTokensPerCharPrompt = 0.3f;
@@ -46,7 +61,6 @@ namespace CelestialCyclesSystem
 
         // State tracking
         private bool isApiRequestInProgress = false;
-        private float timeSinceLastInteractableCheck = 0f;
 
         // Events for registration and interactable changes
         public event Action<iTalk> OniTalkRegistered;
@@ -84,6 +98,7 @@ namespace CelestialCyclesSystem
             }
         }
 
+        // MODIFIED: Update is now simpler and calls the checking method every frame.
         void Update()
         {
             UpdateInteractableNPCsList();
@@ -148,36 +163,36 @@ namespace CelestialCyclesSystem
         #endregion
 
         #region Interactable NPCs Management
+        // MODIFIED: This method now uses Physics.OverlapSphere for high performance.
         public void UpdateInteractableNPCsList()
         {
-            timeSinceLastInteractableCheck += Time.deltaTime;
-            if (timeSinceLastInteractableCheck < interactableCheckInterval) return;
-            timeSinceLastInteractableCheck = 0f;
-
-            List<iTalk> newInteractableNPCs = new List<iTalk>();
             Transform primaryPlayerTransform = GetPrimaryPlayerTransform();
-            if (primaryPlayerTransform == null) return;
-
-            // Clean up null references
-            for (int i = registeredTalkComponents.Count - 1; i >= 0; i--)
+            if (primaryPlayerTransform == null)
             {
-                iTalk npc = registeredTalkComponents[i];
-                if (npc == null) 
-                { 
-                    registeredTalkComponents.RemoveAt(i); 
-                    continue; 
+                if (currentlyInteractableNPCs.Count > 0)
+                {
+                    currentlyInteractableNPCs.Clear();
+                    OnInteractableNPCsChanged?.Invoke(currentlyInteractableNPCs.AsReadOnly());
                 }
-
-                float distance = Vector3.Distance(primaryPlayerTransform.position, npc.Position);
-                bool isCurrentlyInteractable = npc.IsInternallyAvailableForDialogue() && 
-                                             distance <= maxInteractionDistance;
-
-                if (isCurrentlyInteractable) newInteractableNPCs.Add(npc);
+                return;
             }
 
-            // Check if the list has changed
-            if (newInteractableNPCs.Count != currentlyInteractableNPCs.Count || 
-                !newInteractableNPCs.All(currentlyInteractableNPCs.Contains))
+            // Find all nearby colliders on the specified layer.
+            Collider[] hitColliders = Physics.OverlapSphere(primaryPlayerTransform.position, maxInteractionDistance, interactableLayer);
+
+            // Create a new list from the results.
+            List<iTalk> newInteractableNPCs = new List<iTalk>();
+            foreach (var hitCollider in hitColliders)
+            {
+                // Get the iTalk component and check if it's available for dialogue.
+                if (hitCollider.TryGetComponent<iTalk>(out var npc) && npc.IsInternallyAvailableForDialogue())
+                {
+                    newInteractableNPCs.Add(npc);
+                }
+            }
+
+            // Check if the list of interactable NPCs has actually changed before invoking the event.
+            if (newInteractableNPCs.Count != currentlyInteractableNPCs.Count || !newInteractableNPCs.All(currentlyInteractableNPCs.Contains))
             {
                 currentlyInteractableNPCs.Clear();
                 currentlyInteractableNPCs.AddRange(newInteractableNPCs);
@@ -210,10 +225,10 @@ namespace CelestialCyclesSystem
             }
 
             float distance = Vector3.Distance(playerPosition, npc.Position);
-            if (distance > maxInteractionDistance) 
-            { 
-                reason = $"{npc.EntityName} is too far away."; 
-                return false; 
+            if (distance > maxInteractionDistance)
+            {
+                reason = $"{npc.EntityName} is too far away.";
+                return false;
             }
 
             reason = "Available";
@@ -278,10 +293,10 @@ namespace CelestialCyclesSystem
             currentTokenUsage += promptTokens + responseTokens;
         }
 
-        public void ResetTokenQuota() 
-        { 
-            currentTokenUsage = 0; 
-            Debug.Log("[iTalkManager] Token quota reset."); 
+        public void ResetTokenQuota()
+        {
+            currentTokenUsage = 0;
+            Debug.Log("[iTalkManager] Token quota reset.");
         }
 
         public int GetCurrentTokenUsage() => currentTokenUsage;
@@ -362,4 +377,3 @@ namespace CelestialCyclesSystem
         #endregion
     }
 }
-
