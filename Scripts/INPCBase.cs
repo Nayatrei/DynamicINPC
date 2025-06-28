@@ -80,9 +80,8 @@ public class INPCBase : MonoBehaviour
             // This is where you might set INPCAction.Sleeping, INPCAction.Working, etc.
         }
 
-if (!_interacting)
+        if (!_interacting)
         {
-            // Ensure the agent is not stopped if it's not interacting
             if (_navComponent.isStopped)
             {
                 _navComponent.isStopped = false;
@@ -99,13 +98,14 @@ if (!_interacting)
         }
         else
         {
-            // NPC is interacting (e.g., with player)
-            SetAction(INPCAction.Talking); // Set action to Talking when interacting
-            Vector3 lookPos = _player.position - transform.position;
-            lookPos.y = 0;
-            Quaternion rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2F);
-            _navComponent.ResetPath();
+            // If interacting, continuously face the player
+            if (_player != null)
+            {
+                Vector3 lookPos = _player.position - transform.position;
+                lookPos.y = 0;
+                Quaternion rotation = Quaternion.LookRotation(lookPos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2F);
+            }
         }
 
         // Always update the Animator's "Speed" parameter based on NavMeshAgent velocity
@@ -114,11 +114,13 @@ if (!_interacting)
             _animator.SetFloat("Speed", _navComponent.velocity.magnitude);
         }
     }
-/// <summary>
-    /// Puts the NPC into an interaction state, freezing its movement.
+    
+    /// <summary>
+    /// Puts the NPC into an interaction state, freezing its movement and setting its action.
     /// </summary>
     /// <param name="player">The transform of the player to interact with.</param>
-    public void EngageInteraction(Transform player)
+    /// <param name="interactionAction">The action the NPC should perform during the interaction (e.g., Talking).</param>
+    public void EngageInteraction(Transform player, INPCAction interactionAction)
     {
         _interacting = true;
         _player = player;
@@ -128,6 +130,8 @@ if (!_interacting)
             _navComponent.isStopped = true; // Freeze the NavMeshAgent
             _navComponent.ResetPath();      // Clear any existing path
         }
+        
+        SetAction(interactionAction); // Set the specified action for the interaction
     }
 
     /// <summary>
@@ -144,6 +148,7 @@ if (!_interacting)
         }
         SetAction(INPCAction.None); // Return to idle/roaming state
     }
+
     /// <summary>
     /// Sets the current action of the NPC and updates the Animator's "ActionState" parameter.
     /// </summary>
