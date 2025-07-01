@@ -4,8 +4,8 @@ namespace CelestialCyclesSystem
 {
     /// <summary>
     /// This script acts as a bridge between the iTalk dialogue system and the INPC movement/action system.
-    /// It listens for conversation events from the iTalkController and translates them into
-    /// Engage/Disengage commands for the INPCBase on the same GameObject.
+    /// It listens for conversation events from BOTH the iTalkController (player) and iTalkSubManager (NPC-to-NPC)
+    /// and translates them into Engage/Disengage commands for the INPCBase on the same GameObject.
     /// This component should be placed on the same NPC prefab that has INPCBase and iTalk components.
     /// </summary>
     [RequireComponent(typeof(INPCBase))]
@@ -16,8 +16,9 @@ namespace CelestialCyclesSystem
         private INPCBase _npcBase;
         private iTalk _iTalk;
 
-        // Reference to the scene's player controller for dialogue
+        // References to the scene's iTalk managers
         private iTalkController _iTalkController;
+        private iTalkSubManager _iTalkSubManager;
 
         void Awake()
         {
@@ -28,64 +29,92 @@ namespace CelestialCyclesSystem
 
         void Start()
         {
-            // Find the iTalkController in the scene. 
-            // This assumes you have one active iTalkController.
+            // --- Find and Subscribe to Player Conversation Events ---
             _iTalkController = FindObjectOfType<iTalkController>();
-
             if (_iTalkController != null)
             {
-                // Subscribe to the conversation events.
-                // When a conversation starts or ends anywhere, our methods will be called.
-                _iTalkController.OnConversationStarted += HandleConversationStarted;
-                _iTalkController.OnConversationEnded += HandleConversationEnded;
+                _iTalkController.OnConversationStarted += HandlePlayerConversationStarted;
+                _iTalkController.OnConversationEnded += HandlePlayerConversationEnded;
             }
             else
             {
-                Debug.LogError($"[NPCInteractionBridge] No iTalkController found in the scene! The bridge on '{gameObject.name}' will not function.", this);
+                Debug.LogWarning($"[NPCInteractionBridge] No iTalkController found. Player interactions may not trigger INPC actions on '{gameObject.name}'.", this);
+            }
+
+            // --- Find and Subscribe to NPC-to-NPC Conversation Events ---
+            _iTalkSubManager = FindObjectOfType<iTalkSubManager>();
+            if (_iTalkSubManager != null)
+            {
+                _iTalkSubManager.OnNPCConversationStarted += HandleNPCConversationStarted;
+                _iTalkSubManager.OnNPCConversationEnded += HandleNPCConversationEnded;
+            }
+            else
+            {
+                Debug.LogWarning($"[NPCInteractionBridge] No iTalkSubManager found. NPC-to-NPC interactions may not trigger INPC actions on '{gameObject.name}'.", this);
             }
         }
 
         void OnDestroy()
         {
-            // IMPORTANT: Always unsubscribe from events when this object is destroyed to prevent errors.
+            // IMPORTANT: Always unsubscribe from events to prevent errors.
             if (_iTalkController != null)
             {
-                _iTalkController.OnConversationStarted -= HandleConversationStarted;
-                _iTalkController.OnConversationEnded -= HandleConversationEnded;
+                _iTalkController.OnConversationStarted -= HandlePlayerConversationStarted;
+                _iTalkController.OnConversationEnded -= HandlePlayerConversationEnded;
+            }
+            if (_iTalkSubManager != null)
+            {
+                _iTalkSubManager.OnNPCConversationStarted -= HandleNPCConversationStarted;
+                _iTalkSubManager.OnNPCConversationEnded -= HandleNPCConversationEnded;
             }
         }
 
-        /// <summary>
-        /// This method is called by the iTalkController's event whenever any conversation starts.
-        /// </summary>
-        /// <param name="involvedNPC">The iTalk component of the NPC that started the conversation.</param>
-        private void HandleConversationStarted(iTalk involvedNPC)
+        #region Player Conversation Handlers
+
+        private void HandlePlayerConversationStarted(iTalk involvedNPC)
         {
-            // We only care if the conversation involves THIS specific NPC.
-            if (involvedNPC == _iTalk)
+            if (involvedNPC == _iTalk && _iTalkController != null)
             {
-                // Tell our INPCBase to engage, freezing its movement and setting its animation to Talking.
-                if (_iTalkController != null)
-                {
-                    _npcBase.EngageInteraction(_iTalkController.transform, INPCAction.Talking);
-                    Debug.Log($"[NPCInteractionBridge] {gameObject.name} is engaging in conversation.", this);
-                }
+                _npcBase.EngageInteraction(_iTalkController.playerTransform, INPCAction.Talking);
             }
         }
 
-        /// <summary>
-        /// This method is called by the iTalkController's event whenever any conversation ends.
-        /// </summary>
-        /// <param name="involvedNPC">The iTalk component of the NPC that ended the conversation.</param>
-        private void HandleConversationEnded(iTalk involvedNPC)
+        private void HandlePlayerConversationEnded(iTalk involvedNPC)
         {
-            // We only care if the conversation that ended involved THIS specific NPC.
             if (involvedNPC == _iTalk)
             {
-                // Tell our INPCBase to disengage, allowing it to resume its normal activities.
                 _npcBase.DisengageInteraction();
-                Debug.Log($"[NPCInteractionBridge] {gameObject.name} is disengaging from conversation.", this);
             }
         }
+
+        #endregion
+
+        #region NPC-to-NPC Conversation Handlers
+
+        private void HandleNPCConversationStarted(iTalk npc1, iTalk npc2)
+        {
+            // Check if this NPC is one of the two participants.
+            if (_iTalk == npc1)
+            {
+                // If I am npc1, I need to face npc2.
+                _npcBase.EngageInteraction(npc2.transform, INPCAction.Talking);
+            }
+            else if (_iTalk == npc2)
+            {
+                // If I am npc2, I need to face npc1.
+                _npcBase.EngageInteraction(npc1.transform, INPCAction.Talking);
+            }
+        }
+
+        private void HandleNPCConversationEnded(iTalk npc1, iTalk npc2)
+        {
+            // If this NPC was part of the conversation that just ended, disengage.
+            if (_iTalk == npc1 || _iTalk == npc2)
+            {
+                _npcBase.DisengageInteraction();
+            }
+        }
+
+        #endregion
     }
 }

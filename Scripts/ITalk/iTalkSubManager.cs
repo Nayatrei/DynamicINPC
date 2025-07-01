@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System; // Required for Action
 
 namespace CelestialCyclesSystem
 {
@@ -116,6 +117,17 @@ namespace CelestialCyclesSystem
     /// </summary>
     public class iTalkSubManager : MonoBehaviour
     {
+        // --- NEW: Events for the bridge to listen to ---
+        /// <summary>
+        /// Fired when an NPC-to-NPC conversation begins. Passes the two participants.
+        /// </summary>
+        public event Action<iTalk, iTalk> OnNPCConversationStarted;
+        /// <summary>
+        /// Fired when an NPC-to-NPC conversation ends. Passes the two participants.
+        /// </summary>
+        public event Action<iTalk, iTalk> OnNPCConversationEnded;
+
+
         [Header("NPC-to-NPC Dialogue Settings")]
         [SerializeField] private float minDialogueCooldown = 30f;
         [SerializeField] private float maxDialogueCooldown = 90f;
@@ -189,7 +201,7 @@ namespace CelestialCyclesSystem
         {
             while (true)
             {
-                yield return new WaitForSeconds(Random.Range(minDialogueCooldown, maxDialogueCooldown));
+                yield return new WaitForSeconds(UnityEngine.Random.Range(minDialogueCooldown, maxDialogueCooldown));
                 
                 UpdateCooldowns();
                 CheckForNPCToNPCDialogues();
@@ -212,6 +224,8 @@ namespace CelestialCyclesSystem
 
         private void CheckForNPCToNPCDialogues()
         {
+            Debug.Log("[iTalkSubManager] Checking for NPC-to-NPC dialogues..."); // DEBUG LOG
+
             UpdateAvailableNPCs();
             
             if (availableNPCs.Count < 2) return;
@@ -278,7 +292,7 @@ namespace CelestialCyclesSystem
 
                     if (!AreNPCsInRange(npc1, npc2, maxConversationDistance)) continue;
 
-                    float affinityScore = prioritizeByAffinity ? CalculateAffinityScore(npc1, npc2) : Random.Range(0f, 1f);
+                    float affinityScore = prioritizeByAffinity ? CalculateAffinityScore(npc1, npc2) : UnityEngine.Random.Range(0f, 1f);
                     
                     if (affinityScore > bestAffinityScore)
                     {
@@ -298,7 +312,7 @@ namespace CelestialCyclesSystem
             if (availableNPCs.Count == 0) return group;
 
             // Start with a random NPC as the group center
-            iTalk centerNpc = availableNPCs[Random.Range(0, availableNPCs.Count)];
+            iTalk centerNpc = availableNPCs[UnityEngine.Random.Range(0, availableNPCs.Count)];
             group.Add(centerNpc);
 
             // Find nearby NPCs to form a group
@@ -328,18 +342,14 @@ namespace CelestialCyclesSystem
             float worldAffinityScore = 0f;
             if (npc1.assignedPersona.world != null && npc2.assignedPersona.world != null)
             {
-                // Simple compatibility: higher score for similar world affinities
-                // This would need proper implementation based on your WorldAffinity system
-                worldAffinityScore = Random.Range(0.2f, 1f); // Placeholder
+                worldAffinityScore = UnityEngine.Random.Range(0.2f, 1f); // Placeholder
             }
 
             // Calculate FactionAffinity compatibility  
             float factionAffinityScore = 0f;
             if (npc1.assignedPersona.factionAffiliation != null && npc2.assignedPersona.factionAffiliation != null)
             {
-                // Simple compatibility: higher score for same faction or allied factions
-                // This would need proper implementation based on your FactionAffinity system
-                factionAffinityScore = Random.Range(0.2f, 1f); // Placeholder
+                factionAffinityScore = UnityEngine.Random.Range(0.2f, 1f); // Placeholder
             }
             
             return (worldAffinityScore * worldAffinityWeight) + (factionAffinityScore * factionAffinityWeight);
@@ -347,9 +357,6 @@ namespace CelestialCyclesSystem
 
         #region NPC-to-NPC Conversation Management (Centralized)
         
-        /// <summary>
-        /// Initiates NPC-to-NPC conversation - handles full conversation lifecycle
-        /// </summary>
         public void RequestNPCToNPCConversation(iTalk initiator, iTalk partner)
         {
             if (initiator == null || partner == null) return;
@@ -357,7 +364,6 @@ namespace CelestialCyclesSystem
 
             Debug.Log($"[iTalkSubManager] Starting NPC conversation between {initiator.EntityName} and {partner.EntityName}");
 
-            // Create conversation object
             Conversation newConversation = CreateConversationObject();
             if (newConversation != null)
             {
@@ -365,20 +371,15 @@ namespace CelestialCyclesSystem
                 activeNPCConversations.Add(newConversation);
             }
 
-            // Set conversation states
             initiator.SetConversationState(true);
             partner.SetConversationState(true);
 
-            // Notify dialogue state channel if available
             if (iTalkManager.Instance?.GetDialogueStateChannel() != null)
             {
                 iTalkManager.Instance.GetDialogueStateChannel().Raise(initiator, true);
             }
         }
 
-        /// <summary>
-        /// Creates a conversation object from prefab or directly
-        /// </summary>
         private Conversation CreateConversationObject()
         {
             GameObject conversationObj;
@@ -392,7 +393,6 @@ namespace CelestialCyclesSystem
                 conversationObj = new GameObject("NPC Conversation");
             }
 
-            // Add Conversation component if it doesn't exist
             Conversation conversation = conversationObj.GetComponent<Conversation>();
             if (conversation == null)
             {
@@ -402,23 +402,18 @@ namespace CelestialCyclesSystem
             return conversation;
         }
 
-        /// <summary>
-        /// Ends NPC-to-NPC conversation and cleans up state
-        /// </summary>
         public void EndNPCConversation(Conversation conversation)
         {
             if (conversation == null || !activeNPCConversations.Contains(conversation)) return;
 
             Debug.Log($"[iTalkSubManager] Ending NPC conversation");
 
-            // Reset conversation states for all participants
             foreach (var participant in conversation.GetParticipants())
             {
                 if (participant != null)
                 {
                     participant.SetConversationState(false);
                     
-                    // Notify dialogue state channel
                     if (iTalkManager.Instance?.GetDialogueStateChannel() != null)
                     {
                         iTalkManager.Instance.GetDialogueStateChannel().Raise(participant, false);
@@ -426,7 +421,6 @@ namespace CelestialCyclesSystem
                 }
             }
 
-            // Clean up conversation
             activeNPCConversations.Remove(conversation);
             if (conversation.gameObject != null)
             {
@@ -434,9 +428,6 @@ namespace CelestialCyclesSystem
             }
         }
 
-        /// <summary>
-        /// Handles player interruption of NPC-to-NPC conversations
-        /// </summary>
         public bool TryInterruptNPCConversationForPlayer(iTalk npc)
         {
             var existingConversation = activeNPCConversations.FirstOrDefault(c => c.GetParticipants().Contains(npc));
@@ -453,28 +444,26 @@ namespace CelestialCyclesSystem
 
         private void InitiateOneOnOneDialogue(iTalk npc1, iTalk npc2)
         {
-            Debug.Log($"[iTalkSubManager] Initiating one-on-one dialogue between {npc1.EntityName} and {npc2.EntityName}");
+            Debug.Log($"[iTalkSubManager] Found a pair! Initiating dialogue between {npc1.EntityName} and {npc2.EntityName}"); // DEBUG LOG
             
-            // Set NPCs to busy state
             SetNPCBusyState(npc1, true);
             SetNPCBusyState(npc2, true);
 
-            // Create conversation through SubManager's own system
             RequestNPCToNPCConversation(npc1, npc2);
 
-            // Use iTalkUtilities for proper NPC-to-NPC dialogue
+            // --- NEW: Fire the event for the bridge ---
+            OnNPCConversationStarted?.Invoke(npc1, npc2);
+
             StartCoroutine(iTalkUtilities.RequestNPCToNPCDialogue(
                 npc1, npc2, "",
                 (response) => {
                     Debug.Log($"[iTalkSubManager] {npc1.EntityName}: {response}");
                     iTalkUtilities.RequestDialogueTTS(npc1, response);
                     
-                    // Start post-dialogue cooldown after successful dialogue
                     StartCoroutine(HandlePostDialogueCooldown(new List<iTalk> { npc1, npc2 }));
                 },
                 (error) => {
                     Debug.LogError($"[iTalkSubManager] NPC dialogue error: {error}");
-                    // End dialogue even on error
                     StartCoroutine(HandlePostDialogueCooldown(new List<iTalk> { npc1, npc2 }));
                 }
             ));
@@ -484,13 +473,11 @@ namespace CelestialCyclesSystem
         {
             Debug.Log($"[iTalkSubManager] Initiating group dialogue with {group.Count} NPCs: {string.Join(", ", group.Select(n => n.EntityName))}");
             
-            // Set all NPCs to busy state
             foreach (var npc in group)
             {
                 SetNPCBusyState(npc, true);
             }
 
-            // Create group conversation through SubManager's own system
             if (group.Count >= 2)
             {
                 Conversation newConversation = CreateConversationObject();
@@ -499,15 +486,17 @@ namespace CelestialCyclesSystem
                     newConversation.Initialize(group, this);
                     activeNPCConversations.Add(newConversation);
 
-                    // Set conversation states for all participants
                     foreach (var npc in group)
                     {
                         npc.SetConversationState(true);
                     }
+                    
+                    // --- NEW: Fire the event for the bridge ---
+                    // We fire it for the first two members of the group as the main participants
+                    OnNPCConversationStarted?.Invoke(group[0], group[1]);
                 }
             }
 
-            // Use group conversation prompt via iTalkUtilities
             if (group.Count >= 2)
             {
                 iTalk speaker = group[0];
@@ -528,12 +517,10 @@ namespace CelestialCyclesSystem
                         Debug.Log($"[iTalkSubManager] Group conversation - {speaker.EntityName}: {response}");
                         iTalkUtilities.RequestDialogueTTS(speaker, response);
                         
-                        // Start post-dialogue cooldown after successful group dialogue
                         StartCoroutine(HandlePostDialogueCooldown(group));
                     },
                     (error) => {
                         Debug.LogError($"[iTalkSubManager] Group dialogue error: {error}");
-                        // End dialogue even on error
                         StartCoroutine(HandlePostDialogueCooldown(group));
                     },
                     $"GroupConversation-{group.Count}NPCs"
@@ -551,11 +538,15 @@ namespace CelestialCyclesSystem
 
         private IEnumerator HandlePostDialogueCooldown(List<iTalk> participants)
         {
-            // Wait for a random dialogue duration (simulating conversation length)
-            float dialogueDuration = Random.Range(10f, 30f);
+            float dialogueDuration = UnityEngine.Random.Range(10f, 30f);
             yield return new WaitForSeconds(dialogueDuration);
 
-            // End dialogue and apply cooldowns
+            // --- NEW: Fire the end event before resetting state ---
+            if (participants.Count >= 2)
+            {
+                OnNPCConversationEnded?.Invoke(participants[0], participants[1]);
+            }
+
             foreach (var npc in participants)
             {
                 if (npc != null)
@@ -565,7 +556,6 @@ namespace CelestialCyclesSystem
                 }
             }
 
-            // Find and end the conversation involving these participants
             var conversation = activeNPCConversations.FirstOrDefault(c => 
                 participants.All(p => c.GetParticipants().Contains(p)));
             if (conversation != null)
@@ -598,9 +588,6 @@ namespace CelestialCyclesSystem
         public int GetActiveNPCConversationCount() => activeNPCConversations.Count;
         public IReadOnlyList<Conversation> GetActiveNPCConversations() => activeNPCConversations.AsReadOnly();
         
-        /// <summary>
-        /// Set conversation prefab for NPC-to-NPC conversations
-        /// </summary>
         public void SetConversationPrefab(GameObject prefab)
         {
             conversationPrefab = prefab;
