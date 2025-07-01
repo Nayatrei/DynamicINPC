@@ -1,86 +1,82 @@
 ﻿using UnityEngine;
 using CelestialCyclesSystem; // Make sure to add this using directive
 
-// Add RequireComponent for Animator and INPCStats to ensure they are always present on the GameObject
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(INPCStats))] // Added this to ensure INPCStats is present
+[RequireComponent(typeof(INPCStats))]
 public class INPCBase : MonoBehaviour
 {
-    // This script is primarily designed for NPCs within their environments.
-
     #region Public Properties
     [Header("NPC Attributes:")]
-    public INPCRole role; // Current role of the NPC
-    public float roamRadius = 10F; // Radius for free roaming
+    public INPCRole role; 
+    public float roamRadius = 10F;
 
     [Header("Current State")]
-    public INPCAction currentAction; // Current action of the NPC
+    public INPCAction currentAction;
+    
+    [Tooltip("This is now controlled by the INPCManager based on work hours.")]
+    public bool isWorking = false; // The new public flag
     #endregion
 
     #region Private Properties
-    private bool _interacting = false; // Flag for interaction state
-    private UnityEngine.AI.NavMeshAgent _navComponent; // Reference to NavMeshAgent
-    private Animator _animator; // Reference to the Animator component
-    private INPCStats _npcStats; // Reference to the INPCStats component
-    private Vector3 _spawnPosition; // Original spawn position for roaming
-    private bool _roaming = false; // Flag for roaming state
-    private Transform _player; // Reference to the player (for interaction)
+    private bool _interacting = false; 
+    private UnityEngine.AI.NavMeshAgent _navComponent;
+    private Animator _animator; 
+    private INPCStats _npcStats;
+    private Vector3 _spawnPosition;
+    private bool _roaming = false;
+    private Transform _player;
     #endregion
 
-    // Awake is called when the script instance is being loaded.
     void Awake()
     {
-        // Get references to components
         _navComponent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        _animator = GetComponent<Animator>(); // Automatically connect Animator
-        _npcStats = GetComponent<INPCStats>(); // Get INPCStats component
+        _animator = GetComponent<Animator>();
+        _npcStats = GetComponent<INPCStats>(); 
 
-        // Set NavMeshAgent speed based on INPCStats MoveSpeed
         if (_navComponent != null && _npcStats != null)
         {
-            _navComponent.speed = _npcStats.MoveSpeed; // Set NavMeshAgent speed
+            _navComponent.speed = _npcStats.MoveSpeed;
         }
 
-        // Initialize current action
-        SetAction(INPCAction.None); // Default action on Awake (Idle/BlendTree)
+        SetAction(INPCAction.None);
 
-        // Register this NPC with the INPCManager
         if (INPCManager.Instance != null)
         {
             INPCManager.Instance.RegisterNPC(this);
         }
     }
 
-    // Start is called before the first frame update.
 	void Start ()
     {
         _spawnPosition = transform.position;
 	}
 
-    // OnDestroy is called when the behaviour is destroyed.
     void OnDestroy()
     {
-        // Unregister this NPC when it is destroyed
         if (INPCManager.Instance != null)
         {
             INPCManager.Instance.UnregisterNPC(this);
         }
     }
 	
-	// Update is called once per frame.
 	void Update ()
     {
-        // Example of checking work hours (can be integrated into state machine later)
-        if (INPCManager.Instance != null)
+        // The per-frame check to the manager has been removed for performance.
+        // Now, we just check the local 'isWorking' flag.
+        if (isWorking)
         {
-            bool isWorkingHours = INPCManager.Instance.IsWorkHours(this);
-            // You can use 'isWorkingHours' to influence NPC behavior here.
-            // For example, if(!isWorkingHours) then the NPC might prioritize sleeping or idling over working.
-            // This is where you might set INPCAction.Sleeping, INPCAction.Working, etc.
+            // Placeholder for work logic. 
+            // For example, you might want to stop roaming and play a work animation.
+            if (!_interacting) // Don't work if you're talking to the player
+            {
+                SetAction(INPCAction.Working);
+                // You would add logic here to find a work station, etc.
+                // For now, we can just stop the agent.
+                if(!_navComponent.isStopped) _navComponent.isStopped = true;
+            }
         }
-
-        if (!_interacting)
+        else if (!_interacting) // Not working and not interacting, so roam.
         {
             if (_navComponent.isStopped)
             {
@@ -96,9 +92,8 @@ public class INPCBase : MonoBehaviour
                 CheckRoam();
             }
         }
-        else
+        else // Is interacting
         {
-            // If interacting, continuously face the player
             if (_player != null)
             {
                 Vector3 lookPos = _player.position - transform.position;
@@ -108,18 +103,12 @@ public class INPCBase : MonoBehaviour
             }
         }
 
-        // Always update the Animator's "Speed" parameter based on NavMeshAgent velocity
         if (_navComponent != null && _animator != null)
         {
             _animator.SetFloat("Speed", _navComponent.velocity.magnitude);
         }
     }
     
-    /// <summary>
-    /// Puts the NPC into an interaction state, freezing its movement and setting its action.
-    /// </summary>
-    /// <param name="player">The transform of the player to interact with.</param>
-    /// <param name="interactionAction">The action the NPC should perform during the interaction (e.g., Talking).</param>
     public void EngageInteraction(Transform player, INPCAction interactionAction)
     {
         _interacting = true;
@@ -127,16 +116,13 @@ public class INPCBase : MonoBehaviour
 
         if (_navComponent != null)
         {
-            _navComponent.isStopped = true; // Freeze the NavMeshAgent
-            _navComponent.ResetPath();      // Clear any existing path
+            _navComponent.isStopped = true; 
+            _navComponent.ResetPath();
         }
         
-        SetAction(interactionAction); // Set the specified action for the interaction
+        SetAction(interactionAction);
     }
 
-    /// <summary>
-    /// Releases the NPC from an interaction state, allowing it to move again.
-    /// </summary>
     public void DisengageInteraction()
     {
         _interacting = false;
@@ -144,28 +130,22 @@ public class INPCBase : MonoBehaviour
 
         if (_navComponent != null)
         {
-            _navComponent.isStopped = false; // Unfreeze the NavMeshAgent
+            _navComponent.isStopped = false;
         }
-        SetAction(INPCAction.None); // Return to idle/roaming state
+        SetAction(INPCAction.None);
     }
 
-    /// <summary>
-    /// Sets the current action of the NPC and updates the Animator's "ActionState" parameter.
-    /// </summary>
-    /// <param name="action">The new action for the NPC.</param>
     public void SetAction(INPCAction action)
     {
-        if (currentAction == action) return; // Only update if action changes
+        if (currentAction == action) return; 
 
-        currentAction = action; // Update the current action
-        if (_animator != null) // Ensure Animator component exists
+        currentAction = action; 
+        if (_animator != null)
         {
-            // Set the Animator's "ActionState" integer parameter to the enum's integer value
             _animator.SetInteger("ActionState", (int)action);
         }
     }
 
-    //Movement logic
     void CheckRoam()
     {
         if (!_navComponent.pathPending)
@@ -176,7 +156,7 @@ public class INPCBase : MonoBehaviour
                 if (!_navComponent.hasPath || _navComponent.velocity.sqrMagnitude == 0f)
                 {
                     _roaming = false;
-                    SetAction(INPCAction.None); // Transition to Idle/BlendTree when roaming stops
+                    SetAction(INPCAction.None);
                 }
             }
         }
@@ -185,7 +165,7 @@ public class INPCBase : MonoBehaviour
     void FreeRoam()
     {
         _roaming = true;
-        SetAction(INPCAction.None); // Set to Idle/BlendTree for roaming (assuming blend tree handles movement)
+        SetAction(INPCAction.None);
 
         Vector3 randomDirection = Random.insideUnitSphere * roamRadius;
         randomDirection += _spawnPosition;

@@ -9,7 +9,7 @@ namespace CelestialCyclesSystem
 {
     public delegate float TimeProvider();
 
-    [System.Serializable] // RoleWorkSchedule removed, but keep [System.Serializable] if used elsewhere
+    [System.Serializable]
     public class INPCManager : MonoBehaviour
     {
         [Header("NPC Management")]
@@ -46,16 +46,13 @@ namespace CelestialCyclesSystem
 
         private void OnValidate()
         {
-            // This function is called in the editor when the script is loaded or a value is changed.
-            // It ensures that our work hours dictionary stays in sync with the INPCRole enum.
             var allRoles = Enum.GetValues(typeof(INPCRole));
             foreach (INPCRole role in allRoles)
             {
-                if (role == INPCRole.None) continue; // We don't need to schedule the 'None' role.
+                if (role == INPCRole.None) continue; 
 
                 if (!roleWorkHours.ContainsKey(role))
                 {
-                    // If a new role was added to the enum, add it to our dictionary with a default schedule.
                     roleWorkHours[role] = new Vector2(9, 17);
                 }
             }
@@ -120,26 +117,38 @@ namespace CelestialCyclesSystem
             }
 
             Debug.LogWarning($"Work hours not defined for role '{role}' in INPCManager. Returning default values.");
-            return new Vector2(9, 17); // Default if role not found
-        }
-
-        private void UpdateNPCSchedules()
-        {
-
+            return new Vector2(9, 17);
         }
 
         /// <summary>
-        /// Checks if the current time falls within the global sleep window.
-        /// Accounts for overnight sleep periods (e.g., 22:00 to 07:00).
+        /// This method now runs once per frame and updates the state of all NPCs.
         /// </summary>
+        private void UpdateNPCSchedules()
+        {
+            // Loop through every registered NPC
+            foreach (INPCBase npc in allNPCs)
+            {
+                if (npc == null) continue;
+
+                // Determine if this NPC should be working right now
+                bool shouldBeWorking = IsWorkHours(npc);
+
+                // If the NPC's current state doesn't match what it should be, update it.
+                if (npc.isWorking != shouldBeWorking)
+                {
+                    npc.isWorking = shouldBeWorking;
+                    // Optional: Log the state change for debugging
+                    // Debug.Log($"{npc.name} is now {(shouldBeWorking ? "working" : "not working")}.");
+                }
+            }
+        }
+
         private bool IsSleepTime(float currentTime)
         {
-            // If sleep time is later than wake time (e.g., 22:00 sleep, 7:00 wake)
             if (globalSleepWakeTime.x > globalSleepWakeTime.y)
             {
                 return currentTime >= globalSleepWakeTime.x || currentTime < globalSleepWakeTime.y;
             }
-            // If sleep time is earlier than wake time (e.g., 10:00 sleep, 18:00 wake - less common but possible)
             else
             {
                 return currentTime >= globalSleepWakeTime.x && currentTime < globalSleepWakeTime.y;
@@ -152,12 +161,10 @@ namespace CelestialCyclesSystem
             var workHours = GetWorkHoursForRole(npc.role);
             float currentTime = GetCurrentTime();
 
-            // If work start time is later than work end time (e.g., 20:00 start, 04:00 end)
             if (workHours.x > workHours.y)
             {
                 return currentTime >= workHours.x || currentTime < workHours.y;
             }
-            // If work start time is earlier than work end time (standard daytime shift)
             else
             {
                 return currentTime >= workHours.x && currentTime < workHours.y;
@@ -175,9 +182,6 @@ namespace CelestialCyclesSystem
             Debug.Log($"Refreshed NPC list. Found {allNPCs.Count} NPCs.");
         }
 
-        /// <summary>
-        /// Registers an NPC with the manager. Called by individual NPCs on their Awake/Start.
-        /// </summary>
         public void RegisterNPC(INPCBase npc)
         {
             if (npc != null && !allNPCs.Contains(npc))
@@ -186,9 +190,6 @@ namespace CelestialCyclesSystem
             }
         }
 
-        /// <summary>
-        /// Unregisters an NPC from the manager. Called by individual NPCs on their OnDestroy.
-        /// </summary>
         public void UnregisterNPC(INPCBase npc)
         {
             if (npc != null && allNPCs.Contains(npc))
