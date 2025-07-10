@@ -153,6 +153,10 @@ namespace CelestialCyclesSystem
         private List<iTalk> busyNPCs = new List<iTalk>();
         private readonly List<Conversation> activeNPCConversations = new List<Conversation>();
 
+        // Tracks the last time cooldowns were updated so we can accurately
+        // decrement timers even though the routine only runs periodically.
+        private float lastCooldownUpdateTime;
+
         void Start()
         {
             if (iTalkManager.Instance != null)
@@ -163,6 +167,7 @@ namespace CelestialCyclesSystem
                 // Register this SubManager with the main Manager
                 iTalkManager.Instance.SetSubManager(this);
             }
+            lastCooldownUpdateTime = Time.time;
             StartCoroutine(NPCDialogueRoutine());
         }
 
@@ -201,23 +206,27 @@ namespace CelestialCyclesSystem
         {
             while (true)
             {
-                yield return new WaitForSeconds(UnityEngine.Random.Range(minDialogueCooldown, maxDialogueCooldown));
-                
-                UpdateCooldowns();
+                float waitTime = UnityEngine.Random.Range(minDialogueCooldown, maxDialogueCooldown);
+                yield return new WaitForSeconds(waitTime);
+
+                float elapsed = Time.time - lastCooldownUpdateTime;
+                lastCooldownUpdateTime = Time.time;
+
+                UpdateCooldowns(elapsed);
                 CheckForNPCToNPCDialogues();
             }
         }
 
-        private void UpdateCooldowns()
+        private void UpdateCooldowns(float deltaTime)
         {
             var keys = npcDialogueCooldowns.Keys.ToList();
             foreach (var npc in keys)
             {
                 if (npc == null) continue;
-                
+
                 if (npcDialogueCooldowns[npc] > 0)
                 {
-                    npcDialogueCooldowns[npc] -= Time.deltaTime;
+                    npcDialogueCooldowns[npc] -= deltaTime;
                 }
             }
         }
