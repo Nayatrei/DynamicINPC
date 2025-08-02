@@ -47,6 +47,10 @@ namespace CelestialCyclesSystem
         // MODIFIED: This now uses the external iTalkNPCConversation class
         private readonly List<iTalkNPCConversation> activeNPCConversations = new List<iTalkNPCConversation>();
 
+        // Tracks the last time cooldowns were updated so we can accurately
+        // decrement timers even though the routine only runs periodically.
+        private float lastCooldownUpdateTime;
+
         void Start()
         {
             if (iTalkManager.Instance != null)
@@ -55,6 +59,7 @@ namespace CelestialCyclesSystem
                 iTalkManager.Instance.OniTalkUnregistered += OnNPCUnregistered;
                 iTalkManager.Instance.SetNPCDialogueCoordinator(this);
             }
+            lastCooldownUpdateTime = Time.time;
             StartCoroutine(NPCDialogueRoutine());
         }
 
@@ -92,21 +97,35 @@ namespace CelestialCyclesSystem
         {
             while (true)
             {
+<<<<<<< HEAD:Scripts/ITalk/iTalkNPCDialogueCoordinator.cs
                 yield return new WaitForSeconds(UnityEngine.Random.Range(minDialogueCooldown, maxDialogueCooldown));
                 UpdateCooldowns();
+=======
+                float waitTime = UnityEngine.Random.Range(minDialogueCooldown, maxDialogueCooldown);
+                yield return new WaitForSeconds(waitTime);
+
+                float elapsed = Time.time - lastCooldownUpdateTime;
+                lastCooldownUpdateTime = Time.time;
+
+                UpdateCooldowns(elapsed);
+>>>>>>> aa1704c81c2f80f779796885a86e17e44744f743:Scripts/ITalk/iTalkSubManager.cs
                 CheckForNPCToNPCDialogues();
             }
         }
 
-        private void UpdateCooldowns()
+        private void UpdateCooldowns(float deltaTime)
         {
             var keys = npcDialogueCooldowns.Keys.ToList();
             foreach (var npc in keys)
             {
                 if (npc == null) continue;
+<<<<<<< HEAD:Scripts/ITalk/iTalkNPCDialogueCoordinator.cs
+=======
+
+>>>>>>> aa1704c81c2f80f779796885a86e17e44744f743:Scripts/ITalk/iTalkSubManager.cs
                 if (npcDialogueCooldowns[npc] > 0)
                 {
-                    npcDialogueCooldowns[npc] -= Time.deltaTime;
+                    npcDialogueCooldowns[npc] -= deltaTime;
                 }
             }
         }
