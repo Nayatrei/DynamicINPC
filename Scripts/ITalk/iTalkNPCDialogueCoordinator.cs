@@ -11,7 +11,7 @@ namespace CelestialCyclesSystem
     /// prioritization, group conversations, and lifecycle management.
     /// It no longer defines what a conversation is, only manages them.
     /// </summary>
-    public class iTalkSubManager : MonoBehaviour
+    public class iTalkNPCDialogueCoordinator : MonoBehaviour
     {
         public event Action<iTalk, iTalk> OnNPCConversationStarted;
         public event Action<iTalk, iTalk> OnNPCConversationEnded;
@@ -53,7 +53,7 @@ namespace CelestialCyclesSystem
             {
                 iTalkManager.Instance.OniTalkRegistered += OnNPCRegistered;
                 iTalkManager.Instance.OniTalkUnregistered += OnNPCUnregistered;
-                iTalkManager.Instance.SetSubManager(this);
+                iTalkManager.Instance.SetNPCDialogueCoordinator(this);
             }
             StartCoroutine(NPCDialogueRoutine());
         }

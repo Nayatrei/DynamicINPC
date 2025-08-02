@@ -4,7 +4,7 @@ namespace CelestialCyclesSystem
 {
     /// <summary>
     /// This script acts as a bridge between the iTalk dialogue system and the INPC movement/action system.
-    /// It listens for conversation events from BOTH the iTalkController (player) and iTalkSubManager (NPC-to-NPC)
+    /// It listens for conversation events from BOTH the iTalkPlayerCoordinator (player) and iTalkSubManager (NPC-to-NPC)
     /// and translates them into Engage/Disengage commands for the INPCBase on the same GameObject.
     /// This component should be placed on the same NPC prefab that has INPCBase and iTalk components.
     /// </summary>
@@ -17,8 +17,8 @@ namespace CelestialCyclesSystem
         private iTalk _iTalk;
 
         // References to the scene's iTalk managers
-        private iTalkController _iTalkController;
-        private iTalkSubManager _iTalkSubManager;
+        private iTalkPlayerDialogueCoordinator _iTalkPlayerCoordinator;
+        private iTalkNPCDialogueCoordinator _iTalkNPCCoordinator;
 
         void Awake()
         {
@@ -30,42 +30,42 @@ namespace CelestialCyclesSystem
         void Start()
         {
             // --- Find and Subscribe to Player Conversation Events ---
-            _iTalkController = FindObjectOfType<iTalkController>();
-            if (_iTalkController != null)
+            _iTalkPlayerCoordinator = FindObjectOfType<iTalkPlayerDialogueCoordinator>();
+            if (_iTalkPlayerCoordinator != null)
             {
-                _iTalkController.OnConversationStarted += HandlePlayerConversationStarted;
-                _iTalkController.OnConversationEnded += HandlePlayerConversationEnded;
+                _iTalkPlayerCoordinator.OnConversationStarted += HandlePlayerConversationStarted;
+                _iTalkPlayerCoordinator.OnConversationEnded += HandlePlayerConversationEnded;
             }
             else
             {
-                Debug.LogWarning($"[NPCInteractionBridge] No iTalkController found. Player interactions may not trigger INPC actions on '{gameObject.name}'.", this);
+                Debug.LogWarning($"[NPCInteractionBridge] No _iTalkPlayerCoordinator found. Player interactions may not trigger INPC actions on '{gameObject.name}'.", this);
             }
 
             // --- Find and Subscribe to NPC-to-NPC Conversation Events ---
-            _iTalkSubManager = FindObjectOfType<iTalkSubManager>();
-            if (_iTalkSubManager != null)
+            _iTalkNPCCoordinator = FindObjectOfType<iTalkNPCDialogueCoordinator>();
+            if (_iTalkNPCCoordinator != null)
             {
-                _iTalkSubManager.OnNPCConversationStarted += HandleNPCConversationStarted;
-                _iTalkSubManager.OnNPCConversationEnded += HandleNPCConversationEnded;
+                _iTalkNPCCoordinator.OnNPCConversationStarted += HandleNPCConversationStarted;
+                _iTalkNPCCoordinator.OnNPCConversationEnded += HandleNPCConversationEnded;
             }
             else
             {
-                Debug.LogWarning($"[NPCInteractionBridge] No iTalkSubManager found. NPC-to-NPC interactions may not trigger INPC actions on '{gameObject.name}'.", this);
+                Debug.LogWarning($"[NPCInteractionBridge] No iTalkNPCDialogueCoordinator found. NPC-to-NPC interactions may not trigger INPC actions on '{gameObject.name}'.", this);
             }
         }
 
         void OnDestroy()
         {
             // IMPORTANT: Always unsubscribe from events to prevent errors.
-            if (_iTalkController != null)
+            if (_iTalkPlayerCoordinator != null)
             {
-                _iTalkController.OnConversationStarted -= HandlePlayerConversationStarted;
-                _iTalkController.OnConversationEnded -= HandlePlayerConversationEnded;
+                _iTalkPlayerCoordinator.OnConversationStarted -= HandlePlayerConversationStarted;
+                _iTalkPlayerCoordinator.OnConversationEnded -= HandlePlayerConversationEnded;
             }
-            if (_iTalkSubManager != null)
+            if (_iTalkNPCCoordinator != null)
             {
-                _iTalkSubManager.OnNPCConversationStarted -= HandleNPCConversationStarted;
-                _iTalkSubManager.OnNPCConversationEnded -= HandleNPCConversationEnded;
+                _iTalkNPCCoordinator.OnNPCConversationStarted -= HandleNPCConversationStarted;
+                _iTalkNPCCoordinator.OnNPCConversationEnded -= HandleNPCConversationEnded;
             }
         }
 
@@ -73,9 +73,9 @@ namespace CelestialCyclesSystem
 
         private void HandlePlayerConversationStarted(iTalk involvedNPC)
         {
-            if (involvedNPC == _iTalk && _iTalkController != null)
+            if (involvedNPC == _iTalk && _iTalkPlayerCoordinator != null)
             {
-                _npcBase.EngageInteraction(_iTalkController.playerTransform, INPCAction.Talking);
+                _npcBase.EngageInteraction(_iTalkPlayerCoordinator.playerTransform, INPCAction.Talking);
             }
         }
 

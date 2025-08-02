@@ -12,6 +12,10 @@ namespace CelestialCyclesSystem
         [Header("Persona & Dialogue Configuration")]
         public iTalkNPCPersona assignedPersona;
         private iTalkSituationDialogueSO personaDialogueSet;
+        public enum InteractionMode { Everyone, OnlyNPCs, OnlyPlayers }
+        [Header("Interaction Type")]
+        [SerializeField] private InteractionMode interactionMode;
+
 
         [Header("Runtime State")]
         [SerializeField]
@@ -37,7 +41,7 @@ namespace CelestialCyclesSystem
         {
             // Initialize persona dialogue set
             personaDialogueSet = assignedPersona?.situationalDialogueSOReference;
-            
+
             // Register with manager (central registration system)
             if (iTalkManager.Instance != null)
                 iTalkManager.Instance.RegisteriTalk(this);
@@ -63,7 +67,7 @@ namespace CelestialCyclesSystem
             if (controllers?.Count > 0)
             {
                 controllers[0].RequestInteraction(this);
-                
+
                 // Trigger contextual events based on current state
                 TriggerContextualEvents();
             }
@@ -79,16 +83,16 @@ namespace CelestialCyclesSystem
         private void TriggerContextualEvents()
         {
             NPCAvailabilityState currentState = GetInternalAvailability();
-            
+
             // Trigger context-based events
             OnContextualEventTriggered?.Invoke(this, currentState);
-            
+
             // Get and potentially play situational dialogue based on context
             var (contextLine, contextClip) = GetSituationalLineAndAudio(currentState);
             if (!string.IsNullOrWhiteSpace(contextLine))
             {
                 OnDialogueTriggered?.Invoke(this, contextLine);
-                
+
                 // Use iTalkUtilities for TTS (proper delegation)
                 iTalkUtilities.RequestSituationalTTS(this, currentState);
             }
@@ -107,10 +111,10 @@ namespace CelestialCyclesSystem
             {
                 NPCAvailabilityState previousState = currentInternalAvailability;
                 currentInternalAvailability = newState;
-                
+
                 // Trigger availability change event
                 OnInternalAvailabilityChanged?.Invoke(this, newState);
-                
+
                 // Trigger contextual events for state transitions
                 TriggerStateTransitionEvents(previousState, newState);
             }
@@ -123,7 +127,7 @@ namespace CelestialCyclesSystem
         {
             // Log significant state changes
             Debug.Log($"[iTalk:{EntityName}] State changed from {fromState} to {toState}");
-            
+
             // Trigger contextual dialogue for certain transitions
             if (ShouldTriggerDialogueForTransition(fromState, toState))
             {
@@ -134,7 +138,7 @@ namespace CelestialCyclesSystem
                     iTalkUtilities.RequestSituationalTTS(this, toState);
                 }
             }
-            
+
             // Trigger context-based events
             OnContextualEventTriggered?.Invoke(this, toState);
         }
@@ -171,7 +175,7 @@ namespace CelestialCyclesSystem
             if (_isCurrentlyInConversation != inConversation)
             {
                 _isCurrentlyInConversation = inConversation;
-                
+
                 // Trigger contextual events when conversation state changes
                 if (inConversation)
                 {
@@ -274,7 +278,7 @@ namespace CelestialCyclesSystem
             if (!string.IsNullOrWhiteSpace(dialogueLine))
             {
                 OnDialogueTriggered?.Invoke(this, dialogueLine);
-                
+
                 // Play audio with proper prioritization (clip > TTS)
                 if (audioClip != null && _audioSource != null)
                 {

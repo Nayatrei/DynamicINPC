@@ -12,14 +12,14 @@ namespace CelestialCyclesSystem
     public class iTalkNPCConversation : MonoBehaviour
     {
         [SerializeField] private List<iTalk> participants = new List<iTalk>();
-        [SerializeField] private iTalkSubManager parentManager;
+        [SerializeField] private iTalkNPCDialogueCoordinator parentManager;
         [SerializeField] private float conversationStartTime;
         [SerializeField] private bool isActive = false;
 
         /// <summary>
         /// Initialize the conversation with participants and parent manager.
         /// </summary>
-        public void Initialize(List<iTalk> conversationParticipants, iTalkSubManager manager)
+        public void Initialize(List<iTalk> conversationParticipants, iTalkNPCDialogueCoordinator manager)
         {
             participants = new List<iTalk>(conversationParticipants);
             parentManager = manager;

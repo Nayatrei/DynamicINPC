@@ -10,7 +10,7 @@ namespace CelestialCyclesSystem
     /// Processes player inputs for dialogue requests, manages the dialogue UI through iTalkDialogueUI, 
     /// and organizes the interaction queue to ensure sequential and orderly NPC conversations.
     /// </summary>
-    public class iTalkController : MonoBehaviour
+    public class iTalkPlayerDialogueCoordinator : MonoBehaviour
     {
         [Header("Player Reference")]
         [Tooltip("Transform of the player. If null, will use this transform.")]
@@ -48,7 +48,7 @@ namespace CelestialCyclesSystem
         {
             if (activeDialogueUI == null)
             {
-                Debug.LogError("[iTalkController] No dialogue UI available! Player dialogues will not work.");
+                Debug.LogError("[iTalkPlayerDialogueCoordinator] No dialogue UI available! Player dialogues will not work.");
                 enabled = false;
             }
         }
@@ -67,7 +67,7 @@ namespace CelestialCyclesSystem
             if (activeDialogueUI == null && dialogueUIPrefab != null)
             {
                 activeDialogueUI = Instantiate(dialogueUIPrefab);
-                Debug.Log("[iTalkController] Created dialogue UI from prefab.");
+                Debug.Log("[iTalkPlayerDialogueCoordinator] Created dialogue UI from prefab.");
             }
 
             if (activeDialogueUI != null)
@@ -96,7 +96,7 @@ namespace CelestialCyclesSystem
         {
             if (targetNpc == null)
             {
-                Debug.LogWarning("[iTalkController] Cannot request interaction with null NPC.");
+                Debug.LogWarning("[iTalkPlayerDialogueCoordinator] Cannot request interaction with null NPC.");
                 return;
             }
 
@@ -128,7 +128,7 @@ namespace CelestialCyclesSystem
         public void ClearInteractionQueue()
         {
             _interactionQueue.Clear();
-            Debug.Log("[iTalkController] Interaction queue cleared.");
+            Debug.Log("[iTalkPlayerDialogueCoordinator] Interaction queue cleared.");
         }
         #endregion
 
@@ -147,7 +147,7 @@ namespace CelestialCyclesSystem
                 activeDialogueUI?.ShowTemporaryMessage(
                     $"{targetNpc.EntityName} will talk to you next. Queue position: {_interactionQueue.Count}", 
                     queueNotificationDuration);
-                Debug.Log($"[iTalkController] Added {targetNpc.EntityName} to interaction queue. Position: {_interactionQueue.Count}");
+                Debug.Log($"[iTalkPlayerDialogueCoordinator] Added {targetNpc.EntityName} to interaction queue. Position: {_interactionQueue.Count}");
             }
             else
             {

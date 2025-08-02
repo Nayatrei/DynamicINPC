@@ -11,15 +11,15 @@ namespace CelestialCyclesSystem
     /// <summary>
     /// Acts as the central controller for the iTalk system by managing registration and deregistration of all NPCs,
     /// updating the list of interactable NPCs, and overseeing dialogue flow for player-initiated conversations only.
-    /// NPC-to-NPC conversations are handled by iTalkSubManager.
+    /// NPC-to-NPC conversations are handled by iTalkNPCDialogueCoordinator.
     /// </summary>
     ///   
     public interface ITalkManager
     {
         void RegisteriTalk(iTalk talkComponent);
         void UnregisteriTalk(iTalk talkComponent);
-        void RegisterController(iTalkController controller);
-        void UnregisterController(iTalkController controller);
+        void RegisterController(iTalkPlayerDialogueCoordinator controller);
+        void UnregisterController(iTalkPlayerDialogueCoordinator controller);
         bool IsNPCInteractable(iTalk npc, Vector3 playerPosition, out string reason);
         bool TryStartPlayerConversation(iTalk npc);
         void RequestDialogueFromAI(iTalk speakeriTalk, string userInput, string conversationHistory, Action<string> onSuccess, Action<string> onError);
@@ -56,7 +56,7 @@ namespace CelestialCyclesSystem
 
         // Registration management - core responsibility
         private readonly List<iTalk> registeredTalkComponents = new List<iTalk>();
-        private readonly List<iTalkController> registeredControllers = new List<iTalkController>();
+        private readonly List<iTalkPlayerDialogueCoordinator> registeredControllers = new List<iTalkPlayerDialogueCoordinator>();
         private readonly List<iTalk> currentlyInteractableNPCs = new List<iTalk>();
 
         // State tracking
@@ -72,7 +72,7 @@ namespace CelestialCyclesSystem
         public event TTSRequestHandler OnRequestTTSGenerated;
 
         // Reference to SubManager for NPC conversation delegation
-        private iTalkSubManager subManager;
+        private iTalkNPCDialogueCoordinator npcDialogueCoordinator;
 
         void Awake()
         {
@@ -91,10 +91,10 @@ namespace CelestialCyclesSystem
         void Start()
         {
             // Find SubManager for NPC conversation delegation
-            subManager = FindObjectOfType<iTalkSubManager>();
-            if (subManager == null)
+            npcDialogueCoordinator = FindObjectOfType<iTalkNPCDialogueCoordinator>();
+            if (npcDialogueCoordinator == null)
             {
-                Debug.LogWarning("[iTalkManager] iTalkSubManager not found. NPC-to-NPC conversation interruptions may not work.");
+                Debug.LogWarning("[iTalkManager] iTalkNPCDialogueCoordinator not found. NPC-to-NPC conversation interruptions may not work.");
             }
         }
 
@@ -150,13 +150,13 @@ namespace CelestialCyclesSystem
             }
         }
 
-        public void RegisterController(iTalkController controller)
+        public void RegisterController(iTalkPlayerDialogueCoordinator controller)
         {
             if (controller != null && !registeredControllers.Contains(controller))
                 registeredControllers.Add(controller);
         }
 
-        public void UnregisterController(iTalkController controller)
+        public void UnregisterController(iTalkPlayerDialogueCoordinator controller)
         {
             if (controller != null) registeredControllers.Remove(controller);
         }
@@ -236,26 +236,26 @@ namespace CelestialCyclesSystem
         }
         #endregion
 
-        #region Player Conversation Support (Delegation to SubManager)
+        #region Player Conversation Support (Delegation to npcDialogueCoordinator)
         /// <summary>
         /// Attempts to start a player conversation with an NPC, handling interruption of NPC-to-NPC conversations
-        /// Delegates NPC conversation interruption to iTalkSubManager
+        /// Delegates NPC conversation interruption to iTalkNPCDialogueCoordinator
         /// </summary>
         public bool TryStartPlayerConversation(iTalk npc)
         {
             if (npc == null) return false;
 
             // Delegate NPC conversation interruption to SubManager
-            if (subManager != null)
+            if (npcDialogueCoordinator != null)
             {
-                bool wasInterrupted = subManager.TryInterruptNPCConversationForPlayer(npc);
+                bool wasInterrupted = npcDialogueCoordinator.TryInterruptNPCConversationForPlayer(npc);
                 if (wasInterrupted)
                 {
                     Debug.Log($"[iTalkManager] Interrupted NPC conversation for player interaction with {npc.EntityName}");
                 }
             }
 
-            // Player conversations don't need conversation objects - handled by iTalkController
+            // Player conversations don't need conversation objects - handled by iTalkPlayerDialogueCoordinator
             return true;
         }
         #endregion
@@ -357,7 +357,7 @@ namespace CelestialCyclesSystem
         public iTalkApiConfigSO GetApiConfig() => apiConfig;
         public iTalkDialogueStateSO GetDialogueStateChannel() => dialogueStateChannel;
         public List<iTalk> GetRegisteredTalkComponents() => new List<iTalk>(registeredTalkComponents);
-        public List<iTalkController> GetRegisteredControllers() => new List<iTalkController>(registeredControllers);
+        public List<iTalkPlayerDialogueCoordinator> GetRegisteredControllers() => new List<iTalkPlayerDialogueCoordinator>(registeredControllers);
 
         public void CheckRegistrationConsistency()
         {
@@ -368,11 +368,11 @@ namespace CelestialCyclesSystem
         }
 
         /// <summary>
-        /// Sets reference to SubManager for NPC conversation delegation
+        /// Sets reference to NPCDialogueCoordinator for NPC conversation delegation
         /// </summary>
-        public void SetSubManager(iTalkSubManager manager)
+        public void SetNPCDialogueCoordinator(iTalkNPCDialogueCoordinator manager)
         {
-            subManager = manager;
+            npcDialogueCoordinator = manager;
         }
         #endregion
     }

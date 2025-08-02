@@ -107,10 +107,10 @@ namespace CelestialCyclesSystem
                 
                 // Add SubManager diagnostics if available
                 GUILayout.Space(5);
-                var subManager = FindObjectOfType<iTalkSubManager>();
+                var subManager = FindObjectOfType<iTalkNPCDialogueCoordinator>();
                 if (subManager != null)
                 {
-                    EditorGUILayout.LabelField("SubManager (NPC Conversations):", EditorStyles.boldLabel);
+                    EditorGUILayout.LabelField("NPC Conversations:", EditorStyles.boldLabel);
                     EditorGUILayout.LabelField($"Available NPCs: {subManager.GetAvailableNPCCount()}");
                     EditorGUILayout.LabelField($"Busy NPCs: {subManager.GetBusyNPCCount()}");
                     EditorGUILayout.LabelField($"Active NPC Conversations: {subManager.GetActiveNPCConversationCount()}");
