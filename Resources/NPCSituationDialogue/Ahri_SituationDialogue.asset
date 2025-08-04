@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b0c39a580714d6ca6f4a00a0a125d5, type: 3}
+  m_Name: Ahri_SituationDialogue
+  m_EditorClassIdentifier: 
+  desiredLineCounts:
+    dictionaryList:
+    - Key: 0
+      Value: 4
+      index: 0
+      isKeyDuplicated: 0
+    - Key: 1
+      Value: 2
+      index: 1
+      isKeyDuplicated: 0
+    - Key: 2
+      Value: 1
+      index: 2
+      isKeyDuplicated: 0
+    - Key: 3
+      Value: 2
+      index: 3
+      isKeyDuplicated: 0
+    - Key: 4
+      Value: 2
+      index: 4
+      isKeyDuplicated: 0
+    - Key: 5
+      Value: 2
+      index: 5
+      isKeyDuplicated: 0
+    - Key: 6
+      Value: 2
+      index: 6
+      isKeyDuplicated: 0
+    - Key: 7
+      Value: 2
+      index: 7
+      isKeyDuplicated: 0
+  dialogues:
+    dialogues:
+      dictionaryList:
+      - Key: 0
+        Value:
+        - text: Ah, a curious soul approaches
+          audio: {fileID: 8300000, guid: 0b54c8cfa33c64702bde688b4c7efc3c, type: 3}
+        - text: The night is filled with magic, isn't it?
+          audio: {fileID: 8300000, guid: 31853cb72197a4417a3cf3313ebb4b72, type: 3}
+        - text: What brings you to my domain?
+          audio: {fileID: 8300000, guid: a4859582fd5724edf9c054ff902208a6, type: 3}
+        - text: Care for a little charm?
+          audio: {fileID: 8300000, guid: 0d37c3c6e8f0746b6bee9638fb9ba72b, type: 3}
+        index: 0
+        isKeyDuplicated: 0
+      - Key: 1
+        Value:
+        - text: I have a moment to spare, what do you seek?
+          audio: {fileID: 8300000, guid: 6d8f940140483450dafcc3691a8d0992, type: 3}
+        - text: "The winds whisper secrets; let\u2019s hear yours."
+          audio: {fileID: 8300000, guid: 3d4a179a6788e4a16a11a2c47ed48cf6, type: 3}
+        index: 1
+        isKeyDuplicated: 0
+      - Key: 2
+        Value:
+        - text: "Hold on, I\u2019m caught up in something enchanting right now."
+          audio: {fileID: 8300000, guid: 8572387c3ee7d4dd28e71f8a00d9c64f, type: 3}
+        index: 2
+        isKeyDuplicated: 0
+      - Key: 3
+        Value:
+        - text: Even a fox needs her rest...
+          audio: {fileID: 8300000, guid: 22f490df6519547a5adecf9b914e8acb, type: 3}
+        - text: Dreams are where the essence flows freely.
+          audio: {fileID: 8300000, guid: 80ffc9c1e80814172ac97c3fa1f29fc6, type: 3}
+        index: 3
+        isKeyDuplicated: 0
+      - Key: 4
+        Value:
+        - text: "Essence weaving requires focus; it\u2019s not all play, you know!"
+          audio: {fileID: 8300000, guid: 95170f388212440f796a785ed2d16f6a, type: 3}
+        - text: "Just a moment, I\u2019m crafting something delightful."
+          audio: {fileID: 0}
+        index: 4
+        isKeyDuplicated: 0
+      - Key: 5
+        Value:
+        - text: The tales of old are about to unfold...
+          audio: {fileID: 0}
+        - text: Stay close; the magic is about to happen.
+          audio: {fileID: 8300000, guid: b7234985734ba4a65af4ee17061d3a29, type: 3}
+        index: 5
+        isKeyDuplicated: 0
+      - Key: 6
+        Value:
+        - text: Every encounter is a dance; shall we begin?
+          audio: {fileID: 0}
+        - text: Life is but a tapestry of choices; choose wisely.
+          audio: {fileID: 8300000, guid: 8b0a669ed5b844c879e5146c6c7f2cff, type: 3}
+        index: 6
+        isKeyDuplicated: 0
+      - Key: 7
+        Value:
+        - text: Until we meet again, may your path be lit by stars
+          audio: {fileID: 8300000, guid: 40e3bb37beb64479dad32ef0d73ec911, type: 3}
+        - text: Farewell, my friend; remember the magic we shared.
+          audio: {fileID: 8300000, guid: b25ba27b6656b41fb93f7014b603fadd, type: 3}
+        index: 7
+        isKeyDuplicated: 0
+  voiceInstructionPrompt: 'Affect: smooth, resonant voice.
+
+    Tone: playful, mysterious.
+
+    Emotion:
+    confident, charming.
+
+    Pronunciation: clear articulation, moderate pace.
+
+    Phrasing:
+    flowing rhythm, meaningful pauses.
+
+'

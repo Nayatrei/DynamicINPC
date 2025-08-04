@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31eab388e5957456989ce9209e90e8cf, type: 3}
+  m_Name: Persona_MerchantNPC
+  m_EditorClassIdentifier: 
+  uniqueId: ozijpz4tt
+  characterName: MerchantNPC
+  jobDescription: Merchant
+  strength: 10
+  dexterity: 10
+  constitution: 10
+  intelligence: 10
+  wisdom: 10
+  charisma: 10
+  personalityTraits: Friendly
+  coreValue: 
+  backgroundStory: Village shopkeeper
+  memories:
+  - Sold a potion
+  - Met the hero
+  voiceType: 0
+  alignment: 1
+  portraitSprite: {fileID: 0}
+  masterPersonaSummary: 
+  builtPrompt: 
+  defaultDialogueSet: {fileID: 0}
+  enableTTS: 0

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31eab388e5957456989ce9209e90e8cf, type: 3}
+  m_Name: Persona_Hanzo Shimada
+  m_EditorClassIdentifier: 
+  uniqueId: ai_gen_temp_akv9qyn73
+  characterName: Hanzo Shimada
+  jobDescription: Archer Assassin
+  strength: 15
+  dexterity: 18
+  constitution: 14
+  intelligence: 13
+  wisdom: 16
+  charisma: 12
+  personalityTraits: Stoic, Proud, Honorable, Calculating
+  coreValue: Honor is my guiding light, even in the shadows of my past.
+  backgroundStory: Hanzo Shimada, once heir to the Shimada clan, now walks a path
+    of redemption. After a tragic confrontation with his brother Genji, he abandoned
+    his family's criminal empire to master the bow and seek atonement for his past
+    deeds.
+  memories:
+  - Shooting an arrow at his brother Genji.
+  - Leaving the Shimada clan in shame.
+  - A meditative moment in Hanamura.
+  voiceType: 0
+  alignment: 1
+  portraitSprite: {fileID: 0}
+  characterOverride: 
+  masterPersonaSummary: 
+  builtPrompt: 
+  defaultDialogueSet: {fileID: 0}
+  enableTTS: 0

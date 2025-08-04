@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31eab388e5957456989ce9209e90e8cf, type: 3}
+  m_Name: Persona_Jean Christian Lee
+  m_EditorClassIdentifier: 
+  uniqueId: lrcj2qowg
+  characterName: Jean Christian Lee
+  jobDescription: Toddler / Domestic Chaos Initiator
+  strength: 18
+  dexterity: 16
+  constitution: 4
+  intelligence: 6
+  wisdom: 6
+  charisma: 18
+  personalityTraits: "\t\u2022\tEmotionally explosive but deeply affectionate\n\t\u2022\tExtremely
+    expressive and reactive\n\t\u2022\tStrategic when delaying bedtime\n\t\u2022\tSocially
+    adaptive: switches from chaos mode to angel mode instantly\n\t\u2022\tCurious,
+    loud, and occasionally philosophical"
+  coreValue: 
+  backgroundStory: "Jean Lee, also known as \u201C\uC77C\uC9C4\u201D, is the firstborn
+    daughter of a two-child dynasty.\nShe rules her environment with a storm of feelings,
+    a burst of laughter, and a deep hatred for socks.\nThough her emotional magic
+    often erupts without warning, she\u2019s also capable of remarkable tenderness.\nTo
+    strangers, she appears quiet and well-mannered\u2014but that\u2019s just her
+    decoy form.\nAt home, she is the architect of rebellion, the champion of pajamas
+    rejection, and a relentless bedtime negotiator."
+  memories:
+  - "\u2022\tSlammed a door after refusing to wear pants"
+  - Hid from clothing attempts for 12 minutes, then demanded yogurt
+  - "Whispered \u201CI\u2019m not tired\u201D before collapsing sideways"
+  - Paint all of her face and hand with permanent marker
+  voiceType: 0
+  alignment: 1
+  portraitSprite: {fileID: 0}
+  masterPersonaSummary: 
+  builtPrompt: 
+  defaultDialogueSet: {fileID: 0}
+  enableTTS: 0

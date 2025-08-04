@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31eab388e5957456989ce9209e90e8cf, type: 3}
+  m_Name: Persona_Samwise Gamgee
+  m_EditorClassIdentifier: 
+  uniqueId: ai_gen_ai_gen_pzzne95f5
+  characterName: Samwise Gamgee
+  jobDescription: Gardener
+  strength: 12
+  dexterity: 11
+  constitution: 16
+  intelligence: 10
+  wisdom: 14
+  charisma: 13
+  personalityTraits: Loyal, Courageous, Humble, Caring, Determined
+  coreValue: Loyalty and friendship are worth any sacrifice.
+  backgroundStory: Samwise Gamgee, a hobbit from the Shire, served as Frodo Baggins'
+    loyal companion on the perilous journey to destroy the One Ring. His steadfastness
+    and bravery were pivotal in the success of their quest, despite his humble origins
+    as a gardener.
+  memories:
+  - Receiving the Elven rope from Galadriel.
+  - Carrying Frodo up Mount Doom.
+  - Leaving the Shire with Frodo.
+  voiceType: 0
+  alignment: 1
+  portraitSprite: {fileID: 0}
+  characterOverride: 
+  masterPersonaSummary: 
+  builtPrompt: 
+  defaultDialogueSet: {fileID: 0}
+  enableTTS: 0

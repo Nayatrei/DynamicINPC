@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b0c39a580714d6ca6f4a00a0a125d5, type: 3}
+  m_Name: Gandalf_Dialog
+  m_EditorClassIdentifier: 
+  desiredLineCounts:
+    dictionaryList:
+    - Key: 0
+      Value: 3
+      index: 0
+      isKeyDuplicated: 0
+    - Key: 1
+      Value: 2
+      index: 1
+      isKeyDuplicated: 0
+    - Key: 2
+      Value: 2
+      index: 2
+      isKeyDuplicated: 0
+    - Key: 3
+      Value: 1
+      index: 3
+      isKeyDuplicated: 0
+    - Key: 4
+      Value: 2
+      index: 4
+      isKeyDuplicated: 0
+    - Key: 5
+      Value: 2
+      index: 5
+      isKeyDuplicated: 0
+    - Key: 6
+      Value: 2
+      index: 6
+      isKeyDuplicated: 0
+    - Key: 7
+      Value: 3
+      index: 7
+      isKeyDuplicated: 0
+  dialogues:
+    dialogues:
+      dictionaryList:
+      - Key: 0
+        Value:
+        - text: Ah, a wanderer in these treacherous mountains
+          audio: {fileID: 8300000, guid: b9695c7c0d26e41398764a7e2a54444f, type: 3}
+        - text: What brings you to this perilous path, my friend?
+          audio: {fileID: 8300000, guid: 34f9e79dd9d7f40b6b7177dc9d46e9ad, type: 3}
+        - text: Step closer, for the winds carry whispers of your journey.
+          audio: {fileID: 8300000, guid: 2127f9a45925249268c86b4bbc78e1ce, type: 3}
+        index: 0
+        isKeyDuplicated: 0
+      - Key: 1
+        Value:
+        - text: I am here, ready to share what wisdom I can
+          audio: {fileID: 8300000, guid: e3f6827c769f54dc0ab9df0a759c398d, type: 3}
+        - text: Speak your mind, and let us unravel the mysteries that bind us.
+          audio: {fileID: 8300000, guid: 222cfce9624634f728a7683b08db7005, type: 3}
+        index: 1
+        isKeyDuplicated: 0
+      - Key: 2
+        Value:
+        - text: Forgive me, dear traveler, for my thoughts are occupied
+          audio: {fileID: 8300000, guid: 3ab5688b74cc6408688b630e1e94e561, type: 3}
+        - text: The mountain holds many secrets; I must attend to them first.
+          audio: {fileID: 8300000, guid: 4ec64725cd914473abf53f2fecc2649c, type: 3}
+        index: 2
+        isKeyDuplicated: 0
+      - Key: 3
+        Value:
+        - text: Zzz... the stars have woven dreams of old... zzz...
+          audio: {fileID: 8300000, guid: c70c2cb1dd3034b82add8b2e25afcd6f, type: 3}
+        index: 3
+        isKeyDuplicated: 0
+      - Key: 4
+        Value:
+        - text: Patience is a virtue; this task requires my full attention
+          audio: {fileID: 8300000, guid: 9ddb05481081f40a7bca2621373105f9, type: 3}
+        - text: The fire must be stoked just right; perhaps later we shall converse.
+          audio: {fileID: 8300000, guid: 836d3c97e089641ecae5c945d23cdb58, type: 3}
+        index: 4
+        isKeyDuplicated: 0
+      - Key: 5
+        Value:
+        - text: Behold! The shadows stir, and fate calls upon us
+          audio: {fileID: 8300000, guid: fc679f550fe4a4e56bd6b5884f280787, type: 3}
+        - text: We must act swiftly, for time is a fickle ally.
+          audio: {fileID: 8300000, guid: 59a8cad9507264bd489c30c33bb582ee, type: 3}
+        index: 5
+        isKeyDuplicated: 0
+      - Key: 6
+        Value:
+        - text: Alas, my friend, the tides of fate have cast me into silence for
+            now
+          audio: {fileID: 8300000, guid: 838c1664eae8e469bb218da365c7090d, type: 3}
+        - text: There are matters beyond our understanding at play; I cannot speak.
+          audio: {fileID: 8300000, guid: cea5d01bb220d48b185593d3b0136706, type: 3}
+        index: 6
+        isKeyDuplicated: 0
+      - Key: 7
+        Value:
+        - text: May your path be illuminated by the light of hope
+          audio: {fileID: 8300000, guid: 83b5c362e9b484afe81bf13819a03e4b, type: 3}
+        - text: Farewell, brave soul; our destinies may yet intertwine again.
+          audio: {fileID: 8300000, guid: c2c59d697e36d4be99587b818dda7cb8, type: 3}
+        index: 7
+        isKeyDuplicated: 0
+  voiceInstructionPrompt: "Affect: \r\nTone: \r\nEmotion: \r\nPronunciation: \r\nPhrasing:
+    \r\n"

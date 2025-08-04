@@ -1,0 +1,829 @@
+{
+  "openai_token": "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",
+  "profiles": [
+    {
+      "job": "Baby",
+      "personality": "Eat sleep and crawl",
+      "background": "Born 6 months ago and only thing she can say is Mama",
+      "memories": [
+        "Eating lunch now and happy"
+      ],
+      "strength": 10,
+      "dexterity": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10,
+      "alignment": "Neutral",
+      "voiceType": "Girl",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "ogmdzri0j",
+      "name": "Elle",
+      "worldId": "earth_generic",
+      "factionId": "temp_1a5xzlc5g"
+    },
+    {
+      "job": "Mercenary",
+      "personality": "Reserved, determined, struggles with identity, loyal to friends, quietly courageous",
+      "background": "He is the Cloud from Final Fantasy 7\nFormer SOLDIER who now works as a mercenary. Joined AVALANCHE to fight against Shinra, haunted by a mysterious past and conflicted memories.",
+      "memories": [
+        "Left hometown of Nibelheim",
+        "Met Aerith in Midgar",
+        "Witnessed destruction of Sector 7",
+        "Learned truth about his past"
+      ],
+      "strength": 18,
+      "dexterity": 16,
+      "constitution": 15,
+      "intelligence": 13,
+      "wisdom": 12,
+      "charisma": 10,
+      "alignment": "NeutralGood",
+      "voiceType": "GenericMaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "uccunwhz6",
+      "name": "Cloud Strife",
+      "worldId": "r5feqzp9b",
+      "factionId": "temp_v1z4daw0x"
+    },
+    {
+      "job": "Bar Owner / Martial Artist",
+      "personality": "Compassionate, supportive, resilient, courageous, emotionally perceptive",
+      "background": "Tifa from Final Fantasy 7\nChildhood friend of Cloud, owner of Seventh Heaven bar. Core member of AVALANCHE, fights to protect her friends and save the planet from Shinra’s destruction.",
+      "memories": [
+        "Grew up in Nibelheim",
+        "Formed AVALANCHE with Barret",
+        "Saved Cloud in Midgar",
+        "Helped uncover Cloud’s true memories"
+      ],
+      "strength": 14,
+      "dexterity": 18,
+      "constitution": 15,
+      "intelligence": 12,
+      "wisdom": 13,
+      "charisma": 15,
+      "alignment": "Neutral",
+      "voiceType": "GenericFemaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "k4jvqaem8",
+      "name": "Tifa Lockhart",
+      "worldId": "r5feqzp9b",
+      "factionId": "temp_v1z4daw0x"
+    },
+    {
+      "job": "AVALANCHE Leader",
+      "personality": "Passionate, hot-tempered, fiercely protective, stubborn, driven by justice",
+      "background": "Barret from Final Fantasy 7\nFounder and leader of AVALANCHE, determined to destroy Shinra after they ruined his hometown. Father to Marlene, fights for a better future.",
+      "memories": [
+        "Lost arm, replaced with a gun-arm",
+        "Witnessed Corel’s destruction",
+        "Adopted Marlene",
+        "Led assault on Shinra’s reactors"
+      ],
+      "strength": 19,
+      "dexterity": 11,
+      "constitution": 18,
+      "intelligence": 10,
+      "wisdom": 12,
+      "charisma": 13,
+      "alignment": "ChaoticGood",
+      "voiceType": "GenericMaleB",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "f9klqmoyw",
+      "name": "Barret Wallace",
+      "worldId": "r5feqzp9b",
+      "factionId": "temp_v1z4daw0x"
+    },
+    {
+      "job": "Pilot/Agent",
+      "personality": "Cheerful, energetic, heroic",
+      "background": "Tracer from Overwatch. A time-jumping British pilot and Overwatch's mascot. Uses chronal accelerator to fight evil.",
+      "memories": [
+        "Joined Overwatch",
+        "Rescued civilians",
+        "Battled Talon"
+      ],
+      "strength": 10,
+      "dexterity": 18,
+      "constitution": 13,
+      "intelligence": 14,
+      "wisdom": 12,
+      "charisma": 15,
+      "alignment": "ChaoticGood",
+      "voiceType": "GenericFemaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "ow_tracer",
+      "name": "Tracer",
+      "worldId": "earth_overwatch",
+      "factionId": "ow_uk"
+    },
+    {
+      "job": "Pro Gamer/Pilot",
+      "personality": "Confident, playful, determined",
+      "background": "D.Va from Overwatch. Korean mech pilot and esports star. Fights Omnics in a pink MEKA.",
+      "memories": [
+        "Won StarCraft",
+        "Defeated Omnics",
+        "Protected Busan"
+      ],
+      "strength": 11,
+      "dexterity": 15,
+      "constitution": 13,
+      "intelligence": 13,
+      "wisdom": 11,
+      "charisma": 16,
+      "alignment": "NeutralGood",
+      "voiceType": "YoungFemale",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "ow_dva",
+      "name": "D.Va",
+      "worldId": "earth_overwatch",
+      "factionId": "ow_korea"
+    },
+    {
+      "job": "Ninja",
+      "personality": "Calm, agile, self-reflective",
+      "background": "Genji from Overwatch. Japanese cyborg ninja, rebuilt by Overwatch after near-death. Fights with sword and shuriken.",
+      "memories": [
+        "Rescued by Mercy",
+        "Clashed with Hanzo",
+        "Trained with Zenyatta"
+      ],
+      "strength": 12,
+      "dexterity": 17,
+      "constitution": 12,
+      "intelligence": 13,
+      "wisdom": 14,
+      "charisma": 12,
+      "alignment": "ChaoticGood",
+      "voiceType": "GenericMaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "ow_genji",
+      "name": "Genji",
+      "worldId": "earth_overwatch",
+      "factionId": "ow_japan"
+    },
+    {
+      "job": "Tank/Crusader",
+      "personality": "Noble, proud, boisterous",
+      "background": "Reinhardt from Overwatch. German crusader in powered armor, fights with a rocket hammer and shield for justice.",
+      "memories": [
+        "Joined Overwatch",
+        "Defended Eichenwalde",
+        "Led heroes"
+      ],
+      "strength": 18,
+      "dexterity": 9,
+      "constitution": 16,
+      "intelligence": 10,
+      "wisdom": 14,
+      "charisma": 13,
+      "alignment": "LawfulGood",
+      "voiceType": "GenericMaleB",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "ow_reinhardt",
+      "name": "Reinhardt",
+      "worldId": "earth_overwatch",
+      "factionId": "ow_germany"
+    },
+    {
+      "job": "Assassin",
+      "personality": "Brooding, ruthless, vengeful",
+      "background": "Reaper from Overwatch. American wraith-like assassin, dual-wields shotguns. Former Overwatch agent.",
+      "memories": [
+        "Turned into Reaper",
+        "Fought Overwatch",
+        "Battled Soldier:76"
+      ],
+      "strength": 14,
+      "dexterity": 15,
+      "constitution": 14,
+      "intelligence": 12,
+      "wisdom": 12,
+      "charisma": 10,
+      "alignment": "ChaoticNeutral",
+      "voiceType": "GenericMaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "ow_reaper",
+      "name": "Reaper",
+      "worldId": "earth_overwatch",
+      "factionId": "ow_usa"
+    },
+    {
+      "job": "Vastaya Mage",
+      "personality": "Playful, mysterious, charming",
+      "background": "Ahri from League of Legends. Nine-tailed fox Vastaya, manipulates essence and charms foes.",
+      "memories": [
+        "Met humans",
+        "Hunted spirits",
+        "Learned magic"
+      ],
+      "strength": 7,
+      "dexterity": 17,
+      "constitution": 12,
+      "intelligence": 15,
+      "wisdom": 12,
+      "charisma": 16,
+      "alignment": "ChaoticGood",
+      "voiceType": "GenericFemaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "lol_ahri",
+      "name": "Ahri",
+      "worldId": "lol_runeterra",
+      "factionId": "lol_ionia"
+    },
+    {
+      "job": "Marksman/Explorer",
+      "personality": "Curious, daring, quick-witted",
+      "background": "Ezreal from League of Legends. Shuriman explorer, uses gauntlet relics to blast enemies.",
+      "memories": [
+        "Explored temples",
+        "Found lost relic",
+        "Battled Noxians"
+      ],
+      "strength": 8,
+      "dexterity": 16,
+      "constitution": 10,
+      "intelligence": 14,
+      "wisdom": 11,
+      "charisma": 14,
+      "alignment": "NeutralGood",
+      "voiceType": "GenericMaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "lol_ezreal",
+      "name": "Ezreal",
+      "worldId": "lol_runeterra",
+      "factionId": "lol_piltover"
+    },
+    {
+      "job": "Monk",
+      "personality": "Disciplined, stoic, wise",
+      "background": "Lee Sin from League of Legends. Blind monk from Ionia, channels dragon's spirit through martial arts.",
+      "memories": [
+        "Lost his sight",
+        "Saved Ionia",
+        "Trained acolytes"
+      ],
+      "strength": 14,
+      "dexterity": 15,
+      "constitution": 13,
+      "intelligence": 12,
+      "wisdom": 16,
+      "charisma": 10,
+      "alignment": "LawfulGood",
+      "voiceType": "GenericMaleB",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "lol_leesin",
+      "name": "Lee Sin",
+      "worldId": "lol_runeterra",
+      "factionId": "lol_ionia"
+    },
+    {
+      "job": "Swordsman",
+      "personality": "Wandering, proud, intense",
+      "background": "Yasuo from League of Legends. Exiled wind swordsman from Ionia, master of swift blade and wind.",
+      "memories": [
+        "Became a fugitive",
+        "Defeated rivals",
+        "Found redemption"
+      ],
+      "strength": 13,
+      "dexterity": 16,
+      "constitution": 12,
+      "intelligence": 11,
+      "wisdom": 11,
+      "charisma": 13,
+      "alignment": "ChaoticNeutral",
+      "voiceType": "GenericMaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "lol_yasuo",
+      "name": "Yasuo",
+      "worldId": "lol_runeterra",
+      "factionId": "lol_ionia"
+    },
+    {
+      "job": "Virtuoso/Assassin",
+      "personality": "Artistic, meticulous, cold",
+      "background": "Jhin from League of Legends. Zaunite criminal and artist, treats murder as performance art.",
+      "memories": [
+        "Staged assassinations",
+        "Imprisoned by Ionian",
+        "Released by Noxians"
+      ],
+      "strength": 10,
+      "dexterity": 16,
+      "constitution": 10,
+      "intelligence": 15,
+      "wisdom": 13,
+      "charisma": 14,
+      "alignment": "LawfulEvil",
+      "voiceType": "GenericMaleB",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "lol_jhin",
+      "name": "Jhin",
+      "worldId": "lol_runeterra",
+      "factionId": "lol_ionia"
+    },
+    {
+      "job": "Fighter/CEO",
+      "personality": "Cold, calculating, ruthless",
+      "background": "Kazuya Mishima from Tekken. Leader of G Corporation, seeks power and revenge on his father.",
+      "memories": [
+        "Threw father off cliff",
+        "Battled Heihachi",
+        "Fought Jin"
+      ],
+      "strength": 18,
+      "dexterity": 13,
+      "constitution": 16,
+      "intelligence": 14,
+      "wisdom": 12,
+      "charisma": 11,
+      "alignment": "LawfulEvil",
+      "voiceType": "GenericMaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "tk_kazuya",
+      "name": "Kazuya Mishima",
+      "worldId": "earth_tekken",
+      "factionId": "tk_gcorp"
+    },
+    {
+      "job": "Martial Artist",
+      "personality": "Brutal, proud, commanding",
+      "background": "Heihachi Mishima from Tekken. Former leader of Mishima Zaibatsu, feared by all, obsessed with strength.",
+      "memories": [
+        "Threw Kazuya off cliff",
+        "Formed King of Iron Fist",
+        "Battled Jin"
+      ],
+      "strength": 17,
+      "dexterity": 12,
+      "constitution": 15,
+      "intelligence": 13,
+      "wisdom": 12,
+      "charisma": 12,
+      "alignment": "LawfulEvil",
+      "voiceType": "GenericMaleB",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "tk_heihachi",
+      "name": "Heihachi Mishima",
+      "worldId": "earth_tekken",
+      "factionId": "tk_mishima"
+    },
+    {
+      "job": "Fighter",
+      "personality": "Serious, conflicted, honorable",
+      "background": "Jin Kazama from Tekken. Mishima bloodline, torn between good and evil, strives to end the family curse.",
+      "memories": [
+        "Fought Kazuya",
+        "Battled Heihachi",
+        "Controlled Devil Gene"
+      ],
+      "strength": 15,
+      "dexterity": 15,
+      "constitution": 14,
+      "intelligence": 12,
+      "wisdom": 11,
+      "charisma": 13,
+      "alignment": "Neutral",
+      "voiceType": "GenericMaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "tk_jin",
+      "name": "Jin Kazama",
+      "worldId": "earth_tekken",
+      "factionId": "tk_mishima"
+    },
+    {
+      "job": "Assassin",
+      "personality": "Cool, elegant, dangerous",
+      "background": "Nina Williams from Tekken. Lethal Irish assassin, expert in close combat and infiltration.",
+      "memories": [
+        "Battled Anna",
+        "Worked for Mishima",
+        "Participated in tournaments"
+      ],
+      "strength": 13,
+      "dexterity": 17,
+      "constitution": 13,
+      "intelligence": 13,
+      "wisdom": 12,
+      "charisma": 13,
+      "alignment": "Neutral",
+      "voiceType": "GenericFemaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "tk_nina",
+      "name": "Nina Williams",
+      "worldId": "earth_tekken",
+      "factionId": "tk_free"
+    },
+    {
+      "job": "Fighter",
+      "personality": "Energetic, stubborn, loyal",
+      "background": "Paul Phoenix from Tekken. Iconic American fighter with legendary hair, aims to be world’s strongest.",
+      "memories": [
+        "Rivalry with Kazuya",
+        "Lost to Kuma",
+        "Fought in tournaments"
+      ],
+      "strength": 16,
+      "dexterity": 14,
+      "constitution": 14,
+      "intelligence": 11,
+      "wisdom": 10,
+      "charisma": 12,
+      "alignment": "ChaoticGood",
+      "voiceType": "GenericMaleA",
+      "characterOverride": "",
+      "coreValue": "",
+      "id": "tk_paul",
+      "name": "Paul Phoenix",
+      "worldId": "earth_tekken",
+      "factionId": "tk_free"
+    },
+    {
+      "id": "ai_gen_temp_akv9qyn73",
+      "worldId": "earth_overwatch",
+      "factionId": "ow_japan",
+      "name": "Hanzo Shimada",
+      "job": "Archer Assassin",
+      "characterOverride": "This character is Hanzo from Overwatch.",
+      "coreValue": "Honor is my guiding light, even in the shadows of my past.",
+      "personality": "Stoic, Proud, Honorable, Calculating",
+      "background": "Hanzo Shimada, once heir to the Shimada clan, now walks a path of redemption. After a tragic confrontation with his brother Genji, he abandoned his family's criminal empire to master the bow and seek atonement for his past deeds.",
+      "memories": [
+        "Shooting an arrow at his brother Genji.",
+        "Leaving the Shimada clan in shame.",
+        "A meditative moment in Hanamura."
+      ],
+      "strength": 15,
+      "dexterity": 18,
+      "constitution": 14,
+      "intelligence": 13,
+      "wisdom": 16,
+      "charisma": 12,
+      "alignment": "LawfulNeutral",
+      "voiceType": "GruffMale"
+    },
+    {
+      "id": "ai_gen_temp_oy2zr6nlo",
+      "worldId": "earth_generic",
+      "factionId": "",
+      "name": "Jean",
+      "job": "Toddler of Chaos",
+      "characterOverride": "",
+      "coreValue": "Curiosity knows no bounds.",
+      "personality": "Curious, Energetic, Impulsive",
+      "background": "Born in the bustling city of Seoul, Jean is a whirlwind of energy and curiosity. Despite her young age, she has already explored every corner of her family's home, often leaving a trail of chaos in her wake. Her parents are descendants of a long line of scholars, and they hope that one day, Jean's boundless energy will channel into something truly remarkable.",
+      "memories": [
+        "Climbing out of her crib for the first time.",
+        "Spilling juice all over the family dog.",
+        "Drawing on the walls with crayons."
+      ],
+      "strength": 2,
+      "dexterity": 15,
+      "constitution": 8,
+      "intelligence": 5,
+      "wisdom": 3,
+      "charisma": 10,
+      "alignment": "ChaoticNeutral",
+      "voiceType": "YouthfulFemale"
+    },
+    {
+      "id": "ai_gen_temp_yjtjlyfl7",
+      "worldId": "juj1t4rv8",
+      "factionId": "temp_pvgmzc16y",
+      "name": "Gandalf",
+      "job": "Wizard",
+      "characterOverride": "This character is Gandalf from The Lord of the Rings.",
+      "coreValue": "Wisdom is the greatest weapon against darkness.",
+      "personality": "Wise, Mysterious, Compassionate, Stern, Charismatic",
+      "background": "Gandalf is a Maia sent to Middle-earth to aid in the struggle against Sauron. He travels across the land, offering guidance and wisdom to all who seek it, and plays a pivotal role in the War of the Ring.",
+      "memories": [
+        "Arriving in Middle-earth for the first time",
+        "Meeting the hobbits in the Shire",
+        "Falling in Moria while battling the Balrog"
+      ],
+      "strength": 16,
+      "dexterity": 14,
+      "constitution": 15,
+      "intelligence": 19,
+      "wisdom": 20,
+      "charisma": 18,
+      "alignment": "NeutralGood",
+      "voiceType": "ElderlyMale"
+    },
+    {
+      "id": "ai_gen_ai_gen_0kd5nzakd",
+      "worldId": "juj1t4rv8",
+      "factionId": "temp_pvgmzc16y",
+      "name": "Gandalf",
+      "job": "Wizard",
+      "characterOverride": "This character is Gandalf from The Lord of the Rings.",
+      "coreValue": "Wisdom guides the path to victory.",
+      "personality": "Wise, Charismatic, Mysterious, Benevolent",
+      "background": "Gandalf is one of the Istari, sent to Middle-earth by the Valar to aid in the struggle against Sauron. Known for his wisdom and power, he plays a pivotal role in the events of the War of the Ring, guiding and aiding the Free Peoples.",
+      "memories": [
+        "Arriving in Middle-earth as an Istari",
+        "Confronting the Balrog in Moria",
+        "Witnessing the crowning of Aragorn"
+      ],
+      "strength": 14,
+      "dexterity": 13,
+      "constitution": 15,
+      "intelligence": 19,
+      "wisdom": 20,
+      "charisma": 18,
+      "alignment": "NeutralGood",
+      "voiceType": "ElderlyMale"
+    },
+    {
+      "id": "ai_gen_ai_gen_jecsas7ms",
+      "worldId": "juj1t4rv8",
+      "factionId": "temp_pvgmzc16y",
+      "name": "Aragorn",
+      "job": "Ranger of the North",
+      "characterOverride": "This character is Aragorn from The Lord of the Rings.",
+      "coreValue": "To protect the Free Peoples and reclaim his birthright.",
+      "personality": "Brave, Noble, Determined, Compassionate",
+      "background": "Aragorn is the heir to the throne of Gondor, raised in Rivendell by Elrond. As a skilled ranger, he has spent his life defending Middle-earth from the shadows, while slowly accepting his destiny as king.",
+      "memories": [
+        "Learning his true heritage in Rivendell",
+        "Meeting Arwen and falling in love",
+        "Leading the charge at Helm's Deep"
+      ],
+      "strength": 18,
+      "dexterity": 17,
+      "constitution": 16,
+      "intelligence": 15,
+      "wisdom": 16,
+      "charisma": 18,
+      "alignment": "LawfulGood",
+      "voiceType": "GenericMaleA"
+    },
+    {
+      "id": "ai_gen_ai_gen_o9yqxbv3m",
+      "worldId": "juj1t4rv8",
+      "factionId": "temp_pvgmzc16y",
+      "name": "Frodo Baggins",
+      "job": "Ring-bearer",
+      "characterOverride": "This character is Frodo from The Lord of the Rings.",
+      "coreValue": "Even the smallest person can change the course of the future.",
+      "personality": "Brave, Compassionate, Determined, Thoughtful",
+      "background": "Frodo Baggins is a hobbit from the Shire who inherits the One Ring from his uncle, Bilbo. Tasked with its destruction, he embarks on a perilous journey to Mount Doom, guided by the Fellowship of the Ring.",
+      "memories": [
+        "Receiving the One Ring from Bilbo.",
+        "Meeting Strider at the Prancing Pony.",
+        "Standing at the edge of Mount Doom."
+      ],
+      "strength": 8,
+      "dexterity": 12,
+      "constitution": 14,
+      "intelligence": 13,
+      "wisdom": 15,
+      "charisma": 14,
+      "alignment": "ChaoticGood",
+      "voiceType": "YouthfulFemale"
+    },
+    {
+      "id": "ai_gen_ai_gen_8lv0r3hpd",
+      "worldId": "juj1t4rv8",
+      "factionId": "temp_pvgmzc16y",
+      "name": "Legolas",
+      "job": "Elven Prince",
+      "characterOverride": "This character is Legolas from The Lord of the Rings.",
+      "coreValue": "Loyalty to friends and the fight against darkness.",
+      "personality": "Brave, Agile, Observant, Loyal",
+      "background": "Legolas is a prince from the Woodland Realm, a skilled archer, and a member of the Fellowship of the Ring. He journeyed with his companions to help destroy the One Ring and played a crucial role in the battles of Middle-earth.",
+      "memories": [
+        "Meeting Aragorn at the Council of Elrond.",
+        "Gazing upon the beauty of Lothlórien.",
+        "Fighting at Helm's Deep alongside Gimli."
+      ],
+      "strength": 14,
+      "dexterity": 18,
+      "constitution": 13,
+      "intelligence": 14,
+      "wisdom": 12,
+      "charisma": 15,
+      "alignment": "ChaoticGood",
+      "voiceType": "GenericMaleA"
+    },
+    {
+      "id": "ai_gen_ai_gen_pzzne95f5",
+      "worldId": "juj1t4rv8",
+      "factionId": "temp_pvgmzc16y",
+      "name": "Samwise Gamgee",
+      "job": "Gardener",
+      "characterOverride": "This character is Sam from The Lord of the Rings.",
+      "coreValue": "Loyalty and friendship are worth any sacrifice.",
+      "personality": "Loyal, Courageous, Humble, Caring, Determined",
+      "background": "Samwise Gamgee, a hobbit from the Shire, served as Frodo Baggins' loyal companion on the perilous journey to destroy the One Ring. His steadfastness and bravery were pivotal in the success of their quest, despite his humble origins as a gardener.",
+      "memories": [
+        "Receiving the Elven rope from Galadriel.",
+        "Carrying Frodo up Mount Doom.",
+        "Leaving the Shire with Frodo."
+      ],
+      "strength": 12,
+      "dexterity": 11,
+      "constitution": 16,
+      "intelligence": 10,
+      "wisdom": 14,
+      "charisma": 13,
+      "alignment": "NeutralGood",
+      "voiceType": "GenericMaleB"
+    }
+  ],
+  "worlds": [
+    {
+      "id": "earth_generic",
+      "name": "Earth (Generic)",
+      "description": "A vast, ancient orb drifting through the endless Astral Sea, Earth teems with life and magic. Its lands are divided by mighty oceans, cloaked in dense forests, lofty mountains, and endless deserts. Ancient mysteries sleep beneath its crust, and civilizations rise and fall as the ages turn. From the icy Northern Wastes to the blazing deserts of the South, Earth is a tapestry of cultures, races, and wild beasts—where heroes and villains alike carve their legends in the annals of time.",
+      "factions": [
+        {
+          "id": "temp_1a5xzlc5g",
+          "name": "USA (General)",
+          "description": "The Federation of Stars, Bastion of Freedom Within the western continent lies the United States of America, a sprawling federation of fifty sovereign provinces. Forged in revolution and tempered by trial, this land is a beacon of invention, diversity, and ambition."
+        },
+        {
+          "id": "temp_w9z7u9gfm",
+          "name": "Korea (General)",
+          "description": "The Twin Kingdoms of Morning Calm Nestled between turbulent seas and emerald mountains, Korea is a land of proud dynasties and ancient spirits."
+        },
+        {
+          "id": "temp_hk9xd5gc6",
+          "name": "Japan (General)",
+          "description": "The Shogunate of Rising Suns An island realm shrouded in cherry blossoms and myth, Japan is ruled by a shogunate where noble samurai, cunning ninja, and powerful sorcerers walk among mortals and spirits alike."
+        },
+        {
+          "id": "temp_j2eri5l67",
+          "name": "India (General)",
+          "description": "The Mystic Land of a Thousand Kingdoms A subcontinent woven with jungles, deserts, and river valleys, India is an endless tapestry of vibrant kingdoms and timeless legends."
+        },
+        {
+          "id": "temp_w7eixflcm",
+          "name": "France (General)",
+          "description": "The Enchanted Dominion of Chateaux and Revolution A realm famed for its art, intrigue, and romance, France is dotted with vine-covered castles and mystical forests."
+        }
+      ]
+    },
+    {
+      "id": "r5feqzp9b",
+      "name": "Gaia",
+      "description": "The Planet of Living Memory\nA world where crystal rivers of Lifestream flow beneath the earth, Gaia is a land of stark contrasts—bustling arcane cities, untamed wilderness, and relics of lost civilizations. Beneath its surface slumbers a consciousness older than any race, and across its continents, destinies intertwine as heroes and villains shape the fate of the planet itself.",
+      "factions": [
+        {
+          "id": "temp_wle3kw2ib",
+          "name": "Shinra Electric Power Company",
+          "description": "The Empire of Steel and Ether A sprawling, ruthless syndicate, Shinra’s power rivals any kingdom. They harness Mako energy—raw life essence drawn from the planet—to fuel their machines and magic, at the cost of Gaia’s health."
+        },
+        {
+          "id": "temp_v1z4daw0x",
+          "name": "AVALANCHE",
+          "description": "The Rebel Seeds of the Planet A clandestine band of freedom fighters, AVALANCHE risks all to thwart Shinra’s exploitation of Gaia."
+        },
+        {
+          "id": "temp_yj3a6abc4",
+          "name": "SOLDIER",
+          "description": "The Blades of Shinra An elite order of magically enhanced warriors, SOLDIER are both champions and enforcers for Shinra."
+        },
+        {
+          "id": "temp_1m6l5s53s",
+          "name": "Wutai",
+          "description": "The Fallen Sovereignty of the East Once a proud nation renowned for martial prowess and mystical arts, Wutai now struggles under Shinra’s shadow."
+        },
+        {
+          "id": "temp_w3vil4n33",
+          "name": "The Cetra (Ancients)",
+          "description": "The Lost Children of the Lifestream A mystical, near-extinct people, the Cetra are attuned to Gaia’s will."
+        },
+        {
+          "id": "temp_2ts7iimnf",
+          "name": "The Turks",
+          "description": "The Watchful Eyes in the Dark Shinra’s secret operatives: masters of espionage, negotiation, and silent elimination."
+        }
+      ]
+    },
+    {
+      "id": "earth_overwatch",
+      "name": "Earth (Overwatch)",
+      "description": "A near-future Earth where technology, global crises, and unique heroes define an era of conflict and hope. Home to the international task force, Overwatch.",
+      "factions": [
+        {
+          "id": "ow_uk",
+          "name": "United Kingdom (Overwatch)",
+          "description": "An influential European nation known for its innovation, historic landmarks, and key Overwatch operatives like Tracer."
+        },
+        {
+          "id": "ow_korea",
+          "name": "South Korea (Overwatch)",
+          "description": "A technologically advanced nation, defended by its MEKA squad including the esports champion D.Va against omnic threats."
+        },
+        {
+          "id": "ow_japan",
+          "name": "Japan (Overwatch)",
+          "description": "A land of ancient traditions and cutting-edge cybernetics, home to the Shimada ninja clan, including Genji."
+        },
+        {
+          "id": "ow_germany",
+          "name": "Germany (Overwatch)",
+          "description": "A European powerhouse known for its engineering and valiant Crusaders like Reinhardt, dedicated to justice."
+        },
+        {
+          "id": "ow_usa",
+          "name": "United States (Overwatch)",
+          "description": "A diverse and influential nation where former Overwatch agents and shadowy figures like Reaper operate."
+        }
+      ]
+    },
+    {
+      "id": "lol_runeterra",
+      "name": "Runeterra",
+      "description": "A mystical and vast world brimming with diverse regions, powerful magic, ancient conflicts, and legendary champions.",
+      "factions": [
+        {
+          "id": "lol_ionia",
+          "name": "Ionia (League of Legends)",
+          "description": "A spiritual First Land valuing harmony, magic, and martial prowess, home to vastaya, monks, and wind swordsmen."
+        },
+        {
+          "id": "lol_piltover",
+          "name": "Piltover (League of Legends)",
+          "description": "The City of Progress, a beacon of science, art, and commerce, known for its hextech innovations and daring explorers."
+        }
+      ]
+    },
+    {
+      "id": "earth_tekken",
+      "name": "Earth (Tekken)",
+      "description": "A modern Earth dominated by powerful global corporations, most notably the Mishima Zaibatsu and G Corporation, who host the King of Iron Fist martial arts tournaments.",
+      "factions": [
+        {
+          "id": "tk_mishima",
+          "name": "Mishima Zaibatsu (Tekken)",
+          "description": "A formidable Japanese global conglomerate, originally led by Heihachi Mishima, known for its iron grip and hosting the King of Iron Fist Tournament."
+        },
+        {
+          "id": "tk_gcorp",
+          "name": "G Corporation (Tekken)",
+          "description": "A powerful biotech and military conglomerate, a major rival to the Mishima Zaibatsu, often led by Kazuya Mishima."
+        },
+        {
+          "id": "tk_free",
+          "name": "Independent Fighters (Tekken)",
+          "description": "Martial artists and fighters who operate without allegiance to the major corporations, often pursuing personal goals or glory in the tournaments."
+        }
+      ]
+    },
+    {
+      "id": "juj1t4rv8",
+      "name": "Middle-earth",
+      "description": "A vast fantasy land of elves, men, dwarves, hobbits, and dark forces.",
+      "factions": [
+        {
+          "id": "temp_pvgmzc16y",
+          "name": "Free Peoples",
+          "description": "The alliance of elves, men, dwarves, hobbits, and wizards fighting Sauron."
+        },
+        {
+          "id": "temp_5br7m9hvd",
+          "name": "Rivendell",
+          "description": "Noble and wise elves dwelling in Rivendell, led by Elrond"
+        },
+        {
+          "id": "temp_dhi68j9dv",
+          "name": "Erebor",
+          "description": "Dwarves living in the Lonely Mountain, famed for their craftsmanship.Dwarves living in the Lonely Mountain, famed for their craftsmanship."
+        },
+        {
+          "id": "temp_bqxln9fy0",
+          "name": "Forces of Sauron",
+          "description": "Evil creatures and armies under the Dark Lord Sauron"
+        },
+        {
+          "id": "temp_2adfmng4p",
+          "name": "Shire",
+          "description": "Peaceful, small folk living in the Shire."
+        }
+      ]
+    }
+  ],
+  "newsItems": []
+}

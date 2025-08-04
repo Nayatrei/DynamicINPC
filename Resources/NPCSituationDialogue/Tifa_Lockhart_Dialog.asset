@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b0c39a580714d6ca6f4a00a0a125d5, type: 3}
+  m_Name: Tifa_Lockhart_Dialog
+  m_EditorClassIdentifier: 
+  desiredLineCounts:
+    dictionaryList:
+    - Key: 0
+      Value: 3
+      index: 0
+      isKeyDuplicated: 0
+    - Key: 1
+      Value: 2
+      index: 1
+      isKeyDuplicated: 0
+    - Key: 2
+      Value: 3
+      index: 2
+      isKeyDuplicated: 0
+    - Key: 3
+      Value: 1
+      index: 3
+      isKeyDuplicated: 0
+    - Key: 4
+      Value: 2
+      index: 4
+      isKeyDuplicated: 0
+    - Key: 5
+      Value: 1
+      index: 5
+      isKeyDuplicated: 0
+    - Key: 6
+      Value: 2
+      index: 6
+      isKeyDuplicated: 0
+    - Key: 7
+      Value: 3
+      index: 7
+      isKeyDuplicated: 0
+  dialogues:
+    dialogues:
+      dictionaryList:
+      - Key: 0
+        Value:
+        - text: Hey there, Cloud!
+          audio: {fileID: 8300000, guid: 74b30bd52f9cb48a096755b4a78a71dc, type: 3}
+        - text: Welcome to Seventh Heaven!
+          audio: {fileID: 8300000, guid: 159ae6599f887465abefee2cf7025654, type: 3}
+        - text: It's great to see you again!
+          audio: {fileID: 8300000, guid: 978ff46aa8bec4b48b42b16b52196484, type: 3}
+        index: 0
+        isKeyDuplicated: 0
+      - Key: 1
+        Value:
+        - text: What can I get for you?
+          audio: {fileID: 8300000, guid: ee42fd7b953e44ae281350dad05eba33, type: 3}
+        - text: Need a drink or something to eat?
+          audio: {fileID: 8300000, guid: 5adac62c0de0043548220b1f257eb9fe, type: 3}
+        index: 1
+        isKeyDuplicated: 0
+      - Key: 2
+        Value:
+        - text: "Just a moment, I\u2019m mixing a drink!"
+          audio: {fileID: 8300000, guid: d1329b519b35e4c6db13267b5823e257, type: 3}
+        - text: "I\u2019ll be with you in a second!"
+          audio: {fileID: 8300000, guid: 6e9bc27f49ba34f2a80c17873f28af0f, type: 3}
+        - text: Can you help me with these supplies?
+          audio: {fileID: 0}
+        index: 2
+        isKeyDuplicated: 0
+      - Key: 3
+        Value:
+        - text: Zzz... just five more minutes...
+          audio: {fileID: 8300000, guid: 9668eeafb04bb486fbafc548eea15689, type: 3}
+        index: 3
+        isKeyDuplicated: 0
+      - Key: 4
+        Value:
+        - text: "I\u2019m on shift, but I can squeeze in a chat!"
+          audio: {fileID: 8300000, guid: 0d9d5b44bb3dc41c6af9df99be34d5e7, type: 3}
+        - text: Let me finish this order first!
+          audio: {fileID: 8300000, guid: 718e9647a73f3450fb9c4128e545951f, type: 3}
+        index: 4
+        isKeyDuplicated: 0
+      - Key: 5
+        Value:
+        - text: This is it; we have to stay strong together!
+          audio: {fileID: 8300000, guid: 17ec94fd814484283940fd4b1ff43cd9, type: 3}
+        index: 5
+        isKeyDuplicated: 0
+      - Key: 6
+        Value:
+        - text: You know, the planet needs us now more than ever.
+          audio: {fileID: 0}
+        - text: "Let\u2019s keep fighting for a better future!"
+          audio: {fileID: 0}
+        index: 6
+        isKeyDuplicated: 0
+      - Key: 7
+        Value:
+        - text: Take care, okay?
+          audio: {fileID: 8300000, guid: 77c025bfd2ae9454899e5cb46a1f193b, type: 3}
+        - text: Don't be a stranger!
+          audio: {fileID: 8300000, guid: d9d34a513f14948c9b9ef283c31e2ea6, type: 3}
+        - text: "We\u2019ll meet again, I promise!"
+          audio: {fileID: 8300000, guid: 4d03ce90ed9f74af1aa1657507ac438e, type: 3}
+        index: 7
+        isKeyDuplicated: 0
+  voiceInstructionPrompt: 'Affect: warm, clear voice.
+
+    Tone: informal, empathetic,
+    serious.
+
+    Emotion: confident, determined, caring.
+
+    Pronunciation: clear
+    articulation, moderate pace.
+
+    Phrasing: flowing rhythm, meaningful pauses.
+
+'

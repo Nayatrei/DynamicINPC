@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c863ce7ce4dddb04eafee775c4cfaa61, type: 3}
+  m_Name: EcoLife DemoManager
+  m_EditorClassIdentifier: 
+  morningSettings: {fileID: 11400000, guid: ada33310cb7a2f34a8bf4a23dfc998f3, type: 2}
+  noonSettings: {fileID: 11400000, guid: 51f1e2cc32077c443a8555c4f281a79c, type: 2}
+  eveningSettings: {fileID: 11400000, guid: a3ab3782619c3b34c985280fca5d6525, type: 2}
+  nightSettings: {fileID: 11400000, guid: 2715bf8b69af68249ba937bbcdbe0f9c, type: 2}

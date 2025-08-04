@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31eab388e5957456989ce9209e90e8cf, type: 3}
+  m_Name: Persona_Ezreal
+  m_EditorClassIdentifier: 
+  uniqueId: lol_ezreal
+  characterName: Ezreal
+  jobDescription: Marksman/Explorer
+  strength: 8
+  dexterity: 16
+  constitution: 10
+  intelligence: 14
+  wisdom: 11
+  charisma: 14
+  personalityTraits: Curious, daring, quick-witted
+  coreValue: 
+  backgroundStory: Ezreal from League of Legends. Shuriman explorer, uses gauntlet
+    relics to blast enemies.
+  memories:
+  - Explored temples
+  - Found lost relic
+  - Battled Noxians
+  voiceType: 0
+  alignment: 1
+  portraitSprite: {fileID: 0}
+  characterOverride: 
+  masterPersonaSummary: 
+  builtPrompt: 
+  defaultDialogueSet: {fileID: 0}
+  enableTTS: 0

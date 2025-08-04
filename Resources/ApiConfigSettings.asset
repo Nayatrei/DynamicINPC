@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e889de72644f491fb1c9b728254d783, type: 3}
+  m_Name: ApiConfigSettings
+  m_EditorClassIdentifier: 
+  apiKey: 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
+  apiUrl: https://api.openai.com/v1/chat/completions
+  voiceApiUrl: https://api.openai.com/v1/audio/speech
+  modelPreset: 0
+  maxTokens: 150
+  temperature: 0.7
+  topP: 1
+  frequencyPenalty: 0.3
+  presencePenalty: 0.2
+  globalSystemMessage: You are an AI character. Embody your given persona and respond
+    naturally within the context of a game world interaction.
+  initialRequestDelay: 0.1
+  voiceModel: 2
+  voicePreset: 5
+  audioResponseFormat: 0
+  voiceSpeed: 1

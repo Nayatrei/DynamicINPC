@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31eab388e5957456989ce9209e90e8cf, type: 3}
+  m_Name: Persona_Aragorn
+  m_EditorClassIdentifier: 
+  uniqueId: ai_gen_ai_gen_jecsas7ms
+  characterName: Aragorn
+  jobDescription: Ranger of the North
+  strength: 18
+  dexterity: 17
+  constitution: 16
+  intelligence: 15
+  wisdom: 16
+  charisma: 18
+  personalityTraits: Brave, Noble, Determined, Compassionate
+  coreValue: To protect the Free Peoples and reclaim his birthright.
+  backgroundStory: Aragorn is the heir to the throne of Gondor, raised in Rivendell
+    by Elrond. As a skilled ranger, he has spent his life defending Middle-earth
+    from the shadows, while slowly accepting his destiny as king.
+  memories:
+  - Learning his true heritage in Rivendell
+  - Meeting Arwen and falling in love
+  - Leading the charge at Helm's Deep
+  voiceType: 0
+  alignment: 1
+  portraitSprite: {fileID: 0}
+  situationalDialogueSOReference: {fileID: 11400000, guid: 81611c016bace7247b71d48104da615c,
+    type: 2}
+  enableTTS: 0
+  characterOverride: 
+  masterPersonaSummary: 
+  builtPrompt: 

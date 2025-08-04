@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b0c39a580714d6ca6f4a00a0a125d5, type: 3}
+  m_Name: Aragorn_Dialog
+  m_EditorClassIdentifier: 
+  desiredLineCounts:
+    dictionaryList:
+    - Key: 0
+      Value: 2
+      index: 0
+      isKeyDuplicated: 0
+    - Key: 1
+      Value: 2
+      index: 1
+      isKeyDuplicated: 0
+    - Key: 2
+      Value: 1
+      index: 2
+      isKeyDuplicated: 0
+    - Key: 3
+      Value: 2
+      index: 3
+      isKeyDuplicated: 0
+    - Key: 4
+      Value: 2
+      index: 4
+      isKeyDuplicated: 0
+    - Key: 5
+      Value: 2
+      index: 5
+      isKeyDuplicated: 0
+    - Key: 6
+      Value: 3
+      index: 6
+      isKeyDuplicated: 0
+    - Key: 7
+      Value: 3
+      index: 7
+      isKeyDuplicated: 0
+  dialogues:
+    dialogues:
+      dictionaryList:
+      - Key: 0
+        Value:
+        - text: 
+          audio: {fileID: 0}
+        - text: 
+          audio: {fileID: 0}
+        index: 0
+        isKeyDuplicated: 0
+      - Key: 1
+        Value:
+        - text: 
+          audio: {fileID: 0}
+        - text: 
+          audio: {fileID: 0}
+        index: 1
+        isKeyDuplicated: 0
+      - Key: 2
+        Value:
+        - text: 
+          audio: {fileID: 0}
+        index: 2
+        isKeyDuplicated: 0
+      - Key: 3
+        Value:
+        - text: 
+          audio: {fileID: 0}
+        - text: 
+          audio: {fileID: 0}
+        index: 3
+        isKeyDuplicated: 0
+      - Key: 4
+        Value:
+        - text: 
+          audio: {fileID: 0}
+        - text: 
+          audio: {fileID: 0}
+        index: 4
+        isKeyDuplicated: 0
+      - Key: 5
+        Value:
+        - text: 
+          audio: {fileID: 0}
+        - text: 
+          audio: {fileID: 0}
+        index: 5
+        isKeyDuplicated: 0
+      - Key: 6
+        Value:
+        - text: 
+          audio: {fileID: 0}
+        - text: 
+          audio: {fileID: 0}
+        - text: 
+          audio: {fileID: 0}
+        index: 6
+        isKeyDuplicated: 0
+      - Key: 7
+        Value:
+        - text: 
+          audio: {fileID: 0}
+        - text: 
+          audio: {fileID: 0}
+        - text: 
+          audio: {fileID: 0}
+        index: 7
+        isKeyDuplicated: 0
+    desiredLineCounts:
+      dictionaryList:
+      - Key: 0
+        Value: 2
+        index: 0
+        isKeyDuplicated: 0
+      - Key: 1
+        Value: 2
+        index: 1
+        isKeyDuplicated: 0
+      - Key: 2
+        Value: 1
+        index: 2
+        isKeyDuplicated: 0
+      - Key: 3
+        Value: 2
+        index: 3
+        isKeyDuplicated: 0
+      - Key: 4
+        Value: 2
+        index: 4
+        isKeyDuplicated: 0
+      - Key: 5
+        Value: 2
+        index: 5
+        isKeyDuplicated: 0
+      - Key: 6
+        Value: 3
+        index: 6
+        isKeyDuplicated: 0
+      - Key: 7
+        Value: 3
+        index: 7
+        isKeyDuplicated: 0
